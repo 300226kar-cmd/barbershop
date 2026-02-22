@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="hy">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Barbershop</title>
+<link rel="stylesheet" href="tun.css">
+
+</head>
+
+<body>
+
+<header>CHRENC BARBERSHOP</header>
+
+
+<button id="bookBtn">📅 Պատվիրել</button>
+
+<div id="bookingModal">
+<label>Անուն</label><input type="text" id="nameInput" placeholder="Օրինակ՝ Արման"/>
+<label>Հեռախոս</label><input type="text" id="phoneInput" placeholder="Օրինակ՝ 077123456"/>
+<label>Օր</label><select id="daySelect"></select>
+<label>Ժամ</label><select id="timeSelect"></select>
+<div class="modal-buttons">
+<button id="confirmBooking">Հաստատել</button>
+<button id="closeModal">Փակել</button>
+</div>
+<p id="statusMsg"></p>
+</div>
+
+
+<div class="hero">
+Մեր Սանրվածքները
+</div>
+
+<section class="section">
+<h2>Ծառայություններ</h2>
+
+<div class="grid">
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=800&auto=format&fit=crop">
+<h3>Տղամարդու սանրվածք</h3>
+<p>Ժամանակակից ոճ</p>
+<p><strong>3000 ֏</strong></p>
+
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?w=800&auto=format&fit=crop">
+<h3>Մորուք</h3>
+<p>Մոդելավորում</p>
+<p><strong>2000 ֏</strong></p>
+
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=800&auto=format&fit=crop">
+<h3>VIP Փաթեթ</h3>
+<p>Լիարժեք խնամք</p>
+<p><strong>5000 ֏</strong></p>
+</div>
+
+</div>
+</section>
+
+<footer>
+© 2026 Barbershop
+</footer>
+
+<!-- Lightbox -->
+
+<div id="lightbox" onclick="closeImage()">
+<img id="lightbox-img">
+</div>
+
+<script>
+const express = require("express");
+</script>
+
+
+</body>
+</html>
