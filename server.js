@@ -1,3 +1,12 @@
+const path = require("path");
+
+// serve static files
+app.use(express.static(path.join(__dirname, "public")));
+
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
+});
+
 require("dotenv").config();
 
 const express = require("express");
@@ -112,4 +121,5 @@ app.post("/api/delete-booking", async (req, res) => {
 
 app.listen(3000, () => {
   console.log("🚀 Server running at http://localhost:3000");
+
 });
