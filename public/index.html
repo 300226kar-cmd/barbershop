@@ -91,7 +91,7 @@ daySelect.onchange=async()=>{await loadTimesWithAvailability();}
 
 function loadNextWeekDays(){
 daySelect.innerHTML="";const today=new Date();
-for(let i=1;i<=7;i++){let d=new Date();d.setDate(today.getDate()+i);let value=d.toISOString().split("T")[0];let label=d.toLocaleDateString("hy-AM",{weekday:"long",year:"numeric",month:"long",day:"numeric"});let option=document.createElement("option");option.value=value;option.textContent=label;daySelect.appendChild(option);}
+for(let i=0;i<=6;i++){let d=new Date();d.setDate(today.getDate()+i);let value=d.toISOString().split("T")[0];let label=d.toLocaleDateString("hy-AM",{weekday:"long",year:"numeric",month:"long",day:"numeric"});let option=document.createElement("option");option.value=value;option.textContent=label;daySelect.appendChild(option);}
 }
 
 function generateAllSlots(){let slots=[],startHour=10,endHour=23;for(let h=startHour;h<endHour;h++){for(let m=0;m<60;m+=30){slots.push(`${String(h).padStart(2,"0")}:${String(m).padStart(2,"0")}`);}}return slots;}
@@ -117,5 +117,6 @@ if(res.ok){statusMsg.textContent="✅ Պատվերը հաջողությամբ ը
 
 </body>
 </html>
+
 
 
