@@ -87,7 +87,15 @@ const phoneInput=document.getElementById("phoneInput");
 
   let closedWeekdays = [];
 let closedDates = [];
+function showAlert(message, type) {
+  statusMsg.textContent = message;
+  statusMsg.className = "alert " + type;
+  statusMsg.style.display = "block";
 
+  setTimeout(() => {
+    statusMsg.style.display = "none";
+  }, 4000);
+}
 async function loadClosedDays() {
   try {
     const res = await fetch(`${API_URL}/closed-days`);
@@ -138,21 +146,22 @@ const selectedDate=daySelect.value;
 const allSlots=generateAllSlots();
 try{const res=await fetch(`${API_URL}/bookings?date=${selectedDate}`);const bookedTimes=await res.json();
 allSlots.forEach(slot=>{const option=document.createElement("option");option.value=slot;if(bookedTimes.includes(slot)){option.textContent=`${slot} (զբաղված)`;option.disabled=true;}else{option.textContent=slot;}timeSelect.appendChild(option);});
-}catch(err){statusMsg.textContent="❌ Չհաջողվեց բեռնել ժամերը";}
+}catch(err){showAlert("❌ " + data.message, "error");}
 }
 
 confirmBooking.onclick=async()=>{
 const name=nameInput.value.trim(),phone=phoneInput.value.trim(),date=daySelect.value,time=timeSelect.value;
-if(!name||!phone){statusMsg.textContent="❗ Լրացրեք անունը և հեռախոսը";return;}
+if(!name||!phone){showAlert("❌ Խնդրում ենք լրացնել դաշտերը", "error");return;}
 statusMsg.textContent="Ուղարկվում է...";
 try{const res=await fetch(`${API_URL}/book`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({name,phone,date,time})});const data=await res.json();
-if(res.ok){statusMsg.textContent="✅ Պատվերը հաջողությամբ ընդունվեց";await loadTimesWithAvailability();}else{statusMsg.textContent="❌ "+data.message;}}catch(err){statusMsg.textContent="❌ Սերվերի սխալ";}
+if(res.ok){showAlert("✅ Պատվերը հաջողությամբ գրանցվեց", "success");;await loadTimesWithAvailability();}else{statusMsg.textContent="❌ "+data.message;}}catch(err){statusMsg.textContent="❌ Սերվերի սխալ";}
 }
 </script>
 
 
 </body>
 </html>
+
 
 
 
