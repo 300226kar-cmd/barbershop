@@ -85,13 +85,49 @@ const statusMsg=document.getElementById("statusMsg");
 const nameInput=document.getElementById("nameInput");
 const phoneInput=document.getElementById("phoneInput");
 
+  let closedWeekdays = [];
+let closedDates = [];
+
+async function loadClosedDays() {
+  try {
+    const res = await fetch(`${API_URL}/closed-days`);
+    const data = await res.json();
+    closedWeekdays = data.weekdays || [];
+    closedDates = data.dates || [];
+  } catch (err) {
+    console.error("Closed days error");
+  }
+}
+  
 bookBtn.onclick=async()=>{modal.style.display="block";statusMsg.textContent="";loadNextWeekDays();await loadTimesWithAvailability();}
 closeModal.onclick=()=>{modal.style.display="none";}
 daySelect.onchange=async()=>{await loadTimesWithAvailability();}
 
-function loadNextWeekDays(){
-daySelect.innerHTML="";const today=new Date();
-for(let i=0;i<=6;i++){let d=new Date();d.setDate(today.getDate()+i);let value=d.toISOString().split("T")[0];let label=d.toLocaleDateString("hy-AM",{weekday:"long",year:"numeric",month:"long",day:"numeric"});let option=document.createElement("option");option.value=value;option.textContent=label;daySelect.appendChild(option);}
+async function loadNextWeekDays(){
+  await loadClosedDays();
+
+  daySelect.innerHTML="";
+  const today=new Date();
+
+  for(let i=0;i<=6;i++){
+    let d=new Date();
+    d.setDate(today.getDate()+i);
+
+    let value=d.toISOString().split("T")[0];
+    let weekday=d.getDay(); // 0-6
+    let label=d.toLocaleDateString("hy-AM",{weekday:"long",year:"numeric",month:"long",day:"numeric"});
+
+    let option=document.createElement("option");
+    option.value=value;
+    option.textContent=label;
+
+    if(closedWeekdays.includes(String(weekday)) || closedDates.includes(value)){
+      option.disabled=true;
+      option.textContent += " (Փակ)";
+    }
+
+    daySelect.appendChild(option);
+  }
 }
 
 function generateAllSlots(){let slots=[],startHour=10,endHour=23;for(let h=startHour;h<endHour;h++){for(let m=0;m<60;m+=30){slots.push(`${String(h).padStart(2,"0")}:${String(m).padStart(2,"0")}`);}}return slots;}
@@ -117,6 +153,7 @@ if(res.ok){statusMsg.textContent="✅ Պատվերը հաջողությամբ ը
 
 </body>
 </html>
+
 
 
 
