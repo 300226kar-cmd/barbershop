@@ -1,4 +1,4 @@
-require("dotenv").config();
+rrequire("dotenv").config();
 
 const express = require("express");
 const cors = require("cors");
@@ -10,7 +10,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// serve static files
+// static files
 app.use(express.static(path.join(__dirname, "public")));
 
 app.get("/", (req, res) => {
@@ -19,13 +19,17 @@ app.get("/", (req, res) => {
 
 const ADMIN_PASSWORD = "1234"; // փոխիր եթե ուզում ես
 
+// փակ օրերի պահում (memory)
+let closedWeekdays = []; // օրինակ [0,6]
+let closedDates = [];    // օրինակ ["2026-02-25"]
+
 // PostgreSQL connection
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: { rejectUnauthorized: false }
 });
 
-// Ստեղծում ենք table եթե գոյություն չունի
+// ստեղծում ենք bookings table եթե չկա
 pool.query(`
   CREATE TABLE IF NOT EXISTS bookings (
     id BIGINT PRIMARY KEY,
@@ -40,6 +44,9 @@ pool.query(`
   console.error("❌ Table creation error:", err);
 });
 
+
+// ================= BOOKINGS =================
+
 // GET զբաղված ժամերը
 app.get("/api/bookings", async (req, res) => {
   const { date } = req.query;
@@ -52,6 +59,7 @@ app.get("/api/bookings", async (req, res) => {
 
     const bookedTimes = result.rows.map(row => row.time);
     res.json(bookedTimes);
+
   } catch (err) {
     res.status(500).json({ message: "Database error" });
   }
@@ -63,6 +71,13 @@ app.post("/api/book", async (req, res) => {
 
   if (!name || !phone || !date || !time)
     return res.status(400).json({ message: "Բոլոր դաշտերը պարտադիր են" });
+
+  // ստուգում փակ օրերը
+  const dayNumber = new Date(date).getDay();
+
+  if (closedWeekdays.includes(dayNumber) || closedDates.includes(date)) {
+    return res.status(400).json({ message: "Այս օրը փակ է" });
+  }
 
   try {
     const check = await pool.query(
@@ -87,7 +102,9 @@ app.post("/api/book", async (req, res) => {
   }
 });
 
-// Admin բոլոր պատվերները
+// ================= ADMIN =================
+
+// ստանալ բոլոր պատվերները
 app.post("/api/all-bookings", async (req, res) => {
   const { password } = req.body;
 
@@ -99,8 +116,85 @@ app.post("/api/all-bookings", async (req, res) => {
       "SELECT * FROM bookings ORDER BY date, time"
     );
     res.json(result.rows);
+
   } catch (err) {
     res.status(500).json({ message: "Database error" });
+  }
+});
+
+// ջնջել պատվեր
+app.post("/api/delete-booking", async (req, res) => {
+  const { password, id } = req.body;
+
+  if (password !== ADMIN_PASSWORD)
+    return res.status(401).json({ message: "Սխալ գաղտնաբառ" });
+
+  try {
+    await pool.query("DELETE FROM bookings WHERE id = $1", [id]);
+    res.json({ message: "Պատվերը ջնջվեց" });
+
+  } catch (err) {
+    res.status(500).json({ message: "Database error" });
+  }
+});
+
+
+// ================= CLOSED DAYS =================
+
+// ստանալ փակ օրերը
+app.get("/api/closed-days", (req, res) => {
+  res.json({
+    weekdays: closedWeekdays,
+    dates: closedDates
+  });
+});
+
+// ավելացնել փակ օր
+app.post("/api/add-closed-day", (req, res) => {
+  const { password, type, value } = req.body;
+
+  if (password !== ADMIN_PASSWORD)
+    return res.status(401).json({ message: "Սխալ գաղտնաբառ" });
+
+  if (type === "weekday") {
+    if (!closedWeekdays.includes(value))
+      closedWeekdays.push(value);
+  }
+
+  if (type === "date") {
+    if (!closedDates.includes(value))
+      closedDates.push(value);
+  }
+
+  res.json({ message: "Ավելացվեց" });
+});
+
+// ջնջել փակ օր
+app.post("/api/remove-closed-day", (req, res) => {
+  const { password, type, value } = req.body;
+
+  if (password !== ADMIN_PASSWORD)
+    return res.status(401).json({ message: "Սխալ գաղտնաբառ" });
+
+  if (type === "weekday") {
+    closedWeekdays = closedWeekdays.filter(d => d !== value);
+  }
+
+  if (type === "date") {
+    closedDates = closedDates.filter(d => d !== value);
+  }
+
+  res.json({ message: "Ջնջվեց" });
+});
+
+
+// ================= SERVER =================
+
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+  console.log("🚀 Server running on port " + PORT);
+});
   }
 });
 
@@ -124,4 +218,5 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log("🚀 Server running on port " + PORT);
 });
+
 
