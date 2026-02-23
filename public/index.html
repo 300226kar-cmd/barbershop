@@ -149,18 +149,45 @@ allSlots.forEach(slot=>{const option=document.createElement("option");option.val
 }catch(err){showAlert("❌ " + data.message, "error");}
 }
 
-confirmBooking.onclick=async()=>{
-const name=nameInput.value.trim(),phone=phoneInput.value.trim(),date=daySelect.value,time=timeSelect.value;
-if(!name||!phone){showAlert("❌ Խնդրում ենք լրացնել դաշտերը", "error");return;}
-statusMsg.textContent="Ուղարկվում է...";
-try{const res=await fetch(`${API_URL}/book`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({name,phone,date,time})});const data=await res.json();
-if(res.ok){showAlert("✅ Պատվերը հաջողությամբ գրանցվեց", "success");;await loadTimesWithAvailability();}else{statusMsg.textContent="❌ "+data.message;}}catch(err){statusMsg.textContent="❌ Սերվերի սխալ";}
-}
+confirmBooking.onclick = async () => {
+  const name = nameInput.value.trim();
+  const phone = phoneInput.value.trim();
+  const date = daySelect.value;
+  const time = timeSelect.value;
+
+  if (!name || !phone) {
+    showAlert("❌ Լրացրեք բոլոր դաշտերը", "error");
+    return;
+  }
+
+  showAlert("⏳ Ուղարկվում է...", "success");
+
+  try {
+    const res = await fetch(`${API_URL}/book`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, phone, date, time })
+    });
+
+    const data = await res.json();
+
+    if (res.ok) {
+      showAlert("✅ Պատվերը հաջողությամբ գրանցվեց", "success");
+      await loadTimesWithAvailability();
+    } else {
+      showAlert("❌ " + data.message, "error");
+    }
+
+  } catch (err) {
+    showAlert("❌ Սերվերի խնդիր", "error");
+  }
+};
 </script>
 
 
 </body>
 </html>
+
 
 
 
