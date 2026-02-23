@@ -199,24 +199,11 @@ app.listen(PORT, () => {
 });
 
 // Ջնջել պատվեր
-app.post("/api/delete-booking", async (req, res) => {
-  const { password, id } = req.body;
-
-  if (password !== ADMIN_PASSWORD)
-    return res.status(401).json({ message: "Սխալ գաղտնաբառ" });
-
-  try {
-    await pool.query("DELETE FROM bookings WHERE id = $1", [id]);
-    res.json({ message: "Պատվերը ջնջվեց" });
-  } catch (err) {
-    res.status(500).json({ message: "Database error" });
-  }
-});
-
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
   console.log("🚀 Server running on port " + PORT);
 });
+
 
 
