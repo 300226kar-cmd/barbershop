@@ -131,7 +131,7 @@ async function loadNextWeekDays(){
 
     if(closedWeekdays.includes(String(weekday)) || closedDates.includes(value)){
       option.disabled=true;
-      option.textContent += " (Փակ)";
+      option.textContent += " (Այս օրը փակ է)";
     }
 
     daySelect.appendChild(option);
@@ -187,6 +187,7 @@ confirmBooking.onclick = async () => {
 
 </body>
 </html>
+
 
 
 
