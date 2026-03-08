@@ -151,7 +151,7 @@ select {
 }
 
 .hero {
-  background: url("im/andrea-donato-MNu0n-3BIKs-unsplash__FocusFillWyIwLjAwIiwiMC4wMCIsMTEwMCw1Mjld.jpg")
+  background: url("public/img/andrea-donato-MNu0n-3BIKs-unsplash__FocusFillWyIwLjAwIiwiMC4wMCIsMTEwMCw1Mjld.jpg")
     center/cover no-repeat;
   height: 450px;
   font-size: 35px;
@@ -307,5 +307,6 @@ font-size: 25px;
     font-size: 17px;
   }
 }
+
 
 
