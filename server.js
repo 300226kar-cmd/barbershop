@@ -198,7 +198,7 @@ async function cleanOldBookings() {
 }
 
 cleanOldBookings();
-setInterval(cleanOldBookings, 60 * 60 * 1000);
+setInterval(cleanOldBookings, 5 * 60 * 1000);
 
 
 // ================= SERVER =================
@@ -208,4 +208,5 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log("🚀 Server running on port " + PORT);
 });
+
 
