@@ -187,6 +187,19 @@ app.post("/api/remove-closed-day", (req, res) => {
   res.json({ message: "Ջնջվեց" });
 });
 
+// ավտոմատ մաքրում
+async function cleanOldBookings() {
+  try {
+    await pool.query("DELETE FROM bookings WHERE date < CURRENT_DATE");
+    console.log("🧹 Old bookings cleaned");
+  } catch (err) {
+    console.error("Cleaning error:", err);
+  }
+}
+
+cleanOldBookings();
+setInterval(cleanOldBookings, 60 * 60 * 1000);
+
 
 // ================= SERVER =================
 
@@ -195,3 +208,4 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log("🚀 Server running on port " + PORT);
 });
+
