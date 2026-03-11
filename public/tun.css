@@ -208,6 +208,7 @@ select {
 }
 
 #statusMsg {
+  color: #3184ff;
   margin-top: 12px;
   font-size: 14px;
 }
@@ -362,6 +363,7 @@ font-size: 25px;
     font-size:10px ;
   }
 }
+
 
 
 
