@@ -339,8 +339,8 @@ font-size: 25px;
   font-size: 10px;
  }
  .sidenav .closebtn{
-  font-size: 20px;
- 
+  font-size: 25px;
+  padding: 15px;
  }
   .card{
     margin: 5px;
@@ -366,6 +366,7 @@ font-size: 25px;
     font-size:10px ;
   }
 }
+
 
 
 
