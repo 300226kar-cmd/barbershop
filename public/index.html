@@ -113,8 +113,12 @@
 </div>
 
 <script>
-      function openNav() {
-  document.getElementById("mySidenav").style.width = "480px";
+function openNav() {
+  if (window.innerWidth < 768) {
+    document.getElementById("mySidenav").style.width = "100%";
+  } else {
+    document.getElementById("mySidenav").style.width = "480px";
+  }
 }
 
 function closeNav() {
@@ -233,6 +237,7 @@ confirmBooking.onclick = async () => {
 
 </body>
 </html>
+
 
 
 
