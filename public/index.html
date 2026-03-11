@@ -218,7 +218,7 @@ confirmBooking.onclick = async () => {
     const data = await res.json();
 
     if (res.ok) {
-      showAlert("✅ Պատվերը հաջողությամբ գրանցվեց", "success");
+      statusMsg.textContent="✅ Պատվերը հաջողությամբ ընդունվեց";);
       await loadTimesWithAvailability();
     } else {
       showAlert("❌ " + data.message, "error");
@@ -233,6 +233,7 @@ confirmBooking.onclick = async () => {
 
 </body>
 </html>
+
 
 
 
