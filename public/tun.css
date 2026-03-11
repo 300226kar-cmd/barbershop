@@ -332,6 +332,9 @@ font-size: 25px;
 
  
  }
+   #mySidenav{
+  height: 150px;
+ }
  .sidenav>ol{
   font-size: 10px;
  }
@@ -363,6 +366,7 @@ font-size: 25px;
     font-size:10px ;
   }
 }
+
 
 
 
