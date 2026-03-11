@@ -207,6 +207,10 @@ select {
   border-radius: 20px;
 }
 
+#statusMsg {
+  margin-top: 12px;
+  font-size: 14px;
+}
 
 @media  (max-width: 1200px) and (min-width: 1000px) {
   .sidenav .closebtn {
@@ -318,7 +322,7 @@ font-size: 25px;
     margin-top: 20px;
     padding: 0px;
     text-shadow: -4px 4px 4px black;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
   }
 
  button{
@@ -358,6 +362,7 @@ font-size: 25px;
     font-size:10px ;
   }
 }
+
 
 
 
