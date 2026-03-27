@@ -26,7 +26,7 @@ let closedDates = [];    // օրինակ ["2026-02-25"]
 // PostgreSQL connection
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
-  ssl: { rejectUnauthorized: false }
+  ssl: {postgresql://barberdb_yrnh_user:ohrjFAQbSBBowlhv68EFyzso6OrxicMj@dpg-d6bjhbpr0fns739q558g-a/barberdb_yrnh }
 });
 
 // ստեղծում ենք bookings table եթե չկա
