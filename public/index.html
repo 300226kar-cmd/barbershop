@@ -195,7 +195,7 @@ timeSelect.innerHTML="";
 const selectedDate=daySelect.value;
 const allSlots=generateAllSlots();
 try{const res=await fetch(`${API_URL}/bookings?date=${selectedDate}`);const bookedTimes=await res.json();
-allSlots.forEach(slot=>{const option=document.createElement("option");option.value=slot;if(bookedTimes.includes(slot)){option.textContent=`${slot} (զբաղված)`;option.disabled=true;}else{option.textContent=slot;}timeSelect.appendChild(option);});
+allSlots.forEach(slot=>{const option=document.createElement("option");option.value=slot;if(bookedTimes.includes(slot)){option.textContent=`${slot} (զբաղված է)`;option.disabled=true;}else{option.textContent=slot;}timeSelect.appendChild(option);});
 }catch(err){showAlert("❌ " + data.message, "error");}
 }
 
