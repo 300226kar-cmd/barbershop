@@ -181,7 +181,7 @@ async function loadNextWeekDays(){
 
     if(closedWeekdays.includes(String(weekday)) || closedDates.includes(value)){
       option.disabled=true;
-      option.textContent += " (Այս օրը փակ է)";
+      option.textContent += " (Ոչ աշխատանքային)";
     }
 
     daySelect.appendChild(option);
