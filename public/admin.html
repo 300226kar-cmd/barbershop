@@ -15,38 +15,27 @@
   --muted: #8293b0;
   --red: #f33153;
   --green: #079b78;
-  --purple: #6855e9;
 }
 
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
+.language-switch { display:flex; gap:6px; flex-wrap:wrap; align-items:center; }
+.language-switch button { cursor:pointer; padding:7px 9px; border:1px solid #ffffff70; border-radius:8px; background:#ffffff12; color:white; font:inherit; }
+.language-switch button.active { background:#fff; color:#1d3155; }
 
 body {
   margin: 0;
   font-family: Arial, sans-serif;
   color: var(--text);
-  background:
-    radial-gradient(ellipse at top left, #ffffff 0%, transparent 55%),
-    var(--bg);
+ background: radial-gradient(ellipse at top left,#121c3a 0%,transparent 50%),var(--bg);
+ background-repeat: no-repeat;
 }
 
-button, input, select {
-  font: inherit;
-}
-
-button {
-  cursor: pointer;
-  transition: .2s;
-}
-
-button:hover {
-  filter: brightness(.94);
-  transform: translateY(-1px);
-}
+button,input,select { font: inherit; }
+button { cursor: pointer; transition: .2s; }
+button:hover { filter: brightness(.94); transform: translateY(-1px); }
 
 .topbar {
-  background: linear-gradient(110deg, #172944, #304b78);
+  background: linear-gradient(110deg,#172944,#304b78);
   color: white;
   padding: 19px 5%;
   display: flex;
@@ -57,27 +46,10 @@ button:hover {
   box-shadow: 0 5px 20px #1b31531c;
 }
 
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-}
-
-.logo {
-  font-size: 35px;
-}
-
-.brand h1 {
-  font-size: 23px;
-  margin: 0 0 6px;
-  letter-spacing: .5px;
-}
-
-.brand p {
-  margin: 0;
-  color: #d1ddf0;
-  font-size: 14px;
-}
+.brand { display: flex; align-items: center; gap: 15px; }
+.logo { font-size: 35px; }
+.brand h1 { font-size: 23px; margin: 0 0 6px; }
+.brand p { margin: 0; color: #d1ddf0; font-size: 14px; }
 
 .admin-label {
   background: #ffffff17;
@@ -86,10 +58,7 @@ button:hover {
   font-size: 14px;
 }
 
-.container {
-  width: min(1400px, 94%);
-  margin: 28px auto 45px;
-}
+.container { width: min(1400px,94%); margin: 28px auto 45px; }
 
 .card {
   background: rgba(255,255,255,.96);
@@ -127,33 +96,27 @@ button:hover {
   align-items: center;
 }
 
-.login-fields {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-}
+.login-fields { display: flex; gap: 12px; flex-wrap: wrap; }
 
-input, select {
+input {
   width: 100%;
   min-width: 0;
   padding: 14px;
   border: 1px solid #ccdaef;
-  background: #fff;
+  background: white;
   color: var(--text);
   border-radius: 10px;
   outline: none;
 }
 
-input:focus, select:focus {
+input:focus {
   border-color: var(--blue);
   box-shadow: 0 0 0 3px #1264ed15;
 }
 
-.login-fields input {
-  flex: 1;
-}
+.login-fields input { flex: 1; }
 
-.primary, .green-btn, .purple-btn, .danger-btn {
+.primary,.green-btn,.danger-btn {
   color: white;
   border: 0;
   padding: 13px 19px;
@@ -161,13 +124,8 @@ input:focus, select:focus {
   font-weight: bold;
 }
 
-.primary {
-  background: linear-gradient(110deg, #176bf5, #0753d5);
-}
-
-.login-fields .primary {
-  min-width: 150px;
-}
+.primary { background: linear-gradient(110deg,#176bf5,#0753d5); }
+.login-fields .primary { min-width: 150px; }
 
 .info {
   background: #f0f5fd;
@@ -178,17 +136,9 @@ input:focus, select:focus {
   font-size: 14px;
 }
 
-.info strong {
-  display: block;
-  margin-bottom: 5px;
-  color: var(--text);
-}
+.info strong { display: block; margin-bottom: 5px; color: var(--text); }
 
-.status {
-  margin: 12px 0 0;
-  font-size: 14px;
-  overflow-wrap: anywhere;
-}
+.status { margin: 12px 0 0; font-size: 14px; overflow-wrap: anywhere; }
 
 .toolbar {
   display: flex;
@@ -198,15 +148,8 @@ input:focus, select:focus {
   flex-wrap: wrap;
 }
 
-.toolbar .section-title {
-  margin-bottom: 0;
-}
-
-.refresh {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-}
+.toolbar .section-title { margin-bottom: 0; }
+.refresh { display: flex; gap: 8px; align-items: center; }
 
 .table-wrap {
   overflow-x: auto;
@@ -224,28 +167,16 @@ table {
 
 th {
   color: white;
-  background: linear-gradient(110deg, #1d3155, #304a75);
+  background: linear-gradient(110deg,#1d3155,#304a75);
   text-align: left;
   font-size: 14px;
   white-space: nowrap;
 }
 
-th, td {
-  padding: 15px 13px;
-  border-bottom: 1px solid #e7edf7;
-}
-
-td {
-  font-size: 14px;
-}
-
-tbody tr:nth-child(even) {
-  background: #f5f8fd;
-}
-
-tbody tr:hover {
-  background: #eaf2ff;
-}
+th,td { padding: 15px 13px; border-bottom: 1px solid #e7edf7; }
+td { font-size: 14px; }
+tbody tr:nth-child(even) { background: #f5f8fd; }
+tbody tr:hover { background: #eaf2ff; }
 
 .danger-btn {
   background: var(--red);
@@ -255,29 +186,14 @@ tbody tr:hover {
 
 .closed-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1.12fr;
+  grid-template-columns: 1fr 1.2fr;
   gap: 20px;
   align-items: stretch;
 }
 
-.sub-card {
-  padding: 20px;
-  border-radius: 15px;
-  min-width: 0;
-}
-
-.date-card {
-  background: #eff9f7;
-}
-
-.week-card {
-  background: #f2f0ff;
-}
-
-.list-card {
-  background: #f5f8fd;
-  border: 1px solid #e0e9f7;
-}
+.sub-card { padding: 20px; border-radius: 15px; min-width: 0; }
+.date-card { background: #eff9f7; }
+.list-card { background: #f5f8fd; border: 1px solid #e0e9f7; }
 
 .sub-title {
   font-size: 17px;
@@ -287,26 +203,14 @@ tbody tr:hover {
   margin: 0 0 20px;
 }
 
-.sub-title span {
-  font-size: 23px;
-}
+.sub-title span { font-size: 23px; }
+.sub-card input { margin-bottom: 12px; }
 
-.sub-card input, .sub-card select {
-  margin-bottom: 12px;
-}
-
-.green-btn, .purple-btn {
+.green-btn {
   width: 100%;
   margin-top: 3px;
   padding: 14px;
-}
-
-.green-btn {
-  background: linear-gradient(110deg, #079b78, #08ad83);
-}
-
-.purple-btn {
-  background: linear-gradient(110deg, #6753e6, #7763f1);
+  background: linear-gradient(110deg,#079b78,#08ad83);
 }
 
 .closed-item {
@@ -327,17 +231,6 @@ tbody tr:hover {
   overflow-wrap: anywhere;
 }
 
-.closed-item small {
-  color: var(--muted);
-  display: block;
-  margin-top: 4px;
-}
-
-.closed-item .danger-btn {
-  padding: 8px 10px;
-  font-size: 12px;
-}
-
 .empty {
   padding: 20px 5px;
   text-align: center;
@@ -345,90 +238,28 @@ tbody tr:hover {
   font-size: 14px;
 }
 
-#adminPanel {
-  display: none;
+#adminPanel { display: none; }
+
+@media (max-width:950px) {
+  .login-layout { grid-template-columns: 1fr; }
+  .closed-grid { grid-template-columns: 1fr; }
 }
 
-@media (max-width: 950px) {
-  .login-layout {
-    grid-template-columns: 1fr;
-  }
-
-  .closed-grid {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .list-card {
-    grid-column: 1 / -1;
-  }
-}
-
-@media (max-width: 600px) {
-  .topbar {
-    padding: 16px 5%;
-  }
-
-  .brand h1 {
-    font-size: 18px;
-  }
-
-  .logo {
-    font-size: 29px;
-  }
-
-  .admin-label {
-    font-size: 12px;
-    padding: 9px 12px;
-  }
-
-  .container {
-    width: 94%;
-    margin-top: 17px;
-  }
-
-  .card {
-    padding: 16px;
-    border-radius: 15px;
-  }
-
-  .section-title {
-    font-size: 19px;
-    gap: 10px;
-  }
-
-  .title-icon {
-    width: 42px;
-    height: 42px;
-    font-size: 20px;
-  }
-
-  .login-fields {
-    flex-direction: column;
-  }
-
-  .login-fields .primary {
-    width: 100%;
-  }
-
-  .toolbar {
-    align-items: flex-start;
-  }
-
-  .refresh, .refresh button {
-    width: 100%;
-  }
-
-  .closed-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .list-card {
-    grid-column: auto;
-  }
-
-  .sub-card {
-    padding: 15px;
-  }
+@media (max-width:600px) {
+  .topbar { padding: 16px 5%; }
+  .brand h1 { font-size: 18px; }
+  .logo { font-size: 29px; }
+  .admin-label { font-size: 12px; padding: 9px 12px; }
+  .container { width: 94%; margin-top: 17px; }
+  .card { padding: 16px; border-radius: 15px; }
+  .section-title { font-size: 19px; gap: 10px; }
+  .title-icon { width: 42px; height: 42px; font-size: 20px; }
+  .login-fields { flex-direction: column; }
+  .login-fields .primary { width: 100%; }
+  .toolbar { align-items: flex-start; }
+  .refresh,.refresh button { width: 100%; }
+  .sub-card { padding: 15px; }
+  th,td { padding: 11px 9px; }
 }
 </style>
 </head>
@@ -444,6 +275,11 @@ tbody tr:hover {
     </div>
   </div>
   <div class="admin-label">🛡️ Ադմին պանել</div>
+  <div class="language-switch" aria-label="Language">
+    <button type="button" onclick="changeAdminLanguage('hy')" data-lang="hy">🇦🇲 Հայերեն</button>
+    <button type="button" onclick="changeAdminLanguage('ru')" data-lang="ru">🇷🇺 Русский</button>
+    <button type="button" onclick="changeAdminLanguage('en')" data-lang="en">🇬🇧 English</button>
+  </div>
 </header>
 
 <main class="container">
@@ -457,12 +293,9 @@ tbody tr:hover {
         </h2>
 
         <div class="login-fields">
-          <input
-            type="password"
-            id="passwordInput"
-            placeholder="Մուտքագրեք գաղտնաբառը"
-            autocomplete="current-password"
-          >
+          <input type="password" id="passwordInput"
+                 placeholder="Մուտքագրեք գաղտնաբառը"
+                 autocomplete="current-password">
           <button class="primary" id="loginBtn">⇥ Մուտք</button>
         </div>
         <p class="status" id="statusMsg" aria-live="polite"></p>
@@ -470,8 +303,8 @@ tbody tr:hover {
 
       <div class="info">
         <strong>🛡️ Անվտանգ կառավարում</strong>
-        Մուտք գործեք ադմինիստրատորի ձեր գաղտնաբառով՝
-        պատվերներն ու ոչ աշխատանքային օրերը կառավարելու համար։
+        Մուտք գործեք ձեր գաղտնաբառով՝ պատվերներն ու ոչ աշխատանքային
+        ամսաթվերը կառավարելու համար։
       </div>
     </div>
   </section>
@@ -502,9 +335,7 @@ tbody tr:hover {
             </tr>
           </thead>
           <tbody id="bookingsBody">
-            <tr>
-              <td colspan="6" class="empty">Մուտք գործեք՝ պատվերները տեսնելու համար։</td>
-            </tr>
+            <tr><td colspan="6" class="empty">Մուտք գործեք՝ պատվերները տեսնելու համար։</td></tr>
           </tbody>
         </table>
       </div>
@@ -520,33 +351,13 @@ tbody tr:hover {
       <div class="closed-grid">
 
         <div class="sub-card date-card">
-          <h3 class="sub-title">
-            <span>🗓️</span> Փակել կոնկրետ ամսաթիվ
-          </h3>
+          <h3 class="sub-title"><span>🗓️</span> Փակել կոնկրետ ամսաթիվ</h3>
           <input type="date" id="closedDateInput">
           <button class="green-btn" id="addDateBtn">＋ Ավելացնել</button>
         </div>
 
-        <div class="sub-card week-card">
-          <h3 class="sub-title">
-            <span>📅</span> Փակել շաբաթվա օրը
-          </h3>
-          <select id="weekdaySelect">
-            <option value="0">Կիրակի</option>
-            <option value="1">Երկուշաբթի</option>
-            <option value="2">Երեքշաբթի</option>
-            <option value="3">Չորեքշաբթի</option>
-            <option value="4">Հինգշաբթի</option>
-            <option value="5">Ուրբաթ</option>
-            <option value="6">Շաբաթ</option>
-          </select>
-          <button class="purple-btn" id="addWeekdayBtn">＋ Ավելացնել</button>
-        </div>
-
         <div class="sub-card list-card">
-          <h3 class="sub-title">
-            <span>☷</span> Փակ օրերի ցուցակ
-          </h3>
+          <h3 class="sub-title"><span>☷</span> Փակ օրերի ցուցակ</h3>
           <div id="closedList">
             <div class="empty">Փակ օրերի ցուցակը կցուցադրվի այստեղ։</div>
           </div>
@@ -560,226 +371,389 @@ tbody tr:hover {
 </main>
 
 <script>
-/*
-  Դիզայնի HTML/CSS-ը պատրաստ է։
-  Այստեղ միացրեք ձեր գործող admin.html-ի JavaScript-ը,
-  որը կապվում է Render API-ի հետ։
-*/
-</script>
+const API_URL = "https://barbershop-9qbq.onrender.com/api";
 
-</body>
-</html>
+const passwordInput = document.getElementById("passwordInput");
+const loginBtn = document.getElementById("loginBtn");
+const statusMsg = document.getElementById("statusMsg");
+const adminPanel = document.getElementById("adminPanel");
+const refreshBtn = document.getElementById("refreshBtn");
+const bookingsBody = document.getElementById("bookingsBody");
+const bookingStatus = document.getElementById("bookingStatus");
+const closedDateInput = document.getElementById("closedDateInput");
+const addDateBtn = document.getElementById("addDateBtn");
+const closedList = document.getElementById("closedList");
+const closedStatus = document.getElementById("closedStatus");
 
+let adminPassword = "";
 
-<script>
-const API_URL="/api";
+function showMessage(element, message, error = false) {
+  element.textContent = translateAdminMessage(message);
+  element.style.color = error ? "#f33153" : "#079b78";
+}
 
-const passwordInput=document.getElementById("passwordInput");
-const loginBtn=document.getElementById("loginBtn");
-const statusMsg=document.getElementById("statusMsg");
+async function readResponse(res) {
+  const data = await res.json();
+  if (!res.ok) {
+    throw new Error(data.message || "Սերվերի սխալ");
+  }
+  return data;
+}
 
-const adminPanel=document.getElementById("adminPanel");
-const refreshBtn=document.getElementById("refreshBtn");
-const bookingsBody=document.getElementById("bookingsBody");
+loginBtn.onclick = async () => {
+  adminPassword = passwordInput.value.trim();
 
-const closedDateInput=document.getElementById("closedDateInput");
-const addDateBtn=document.getElementById("addDateBtn");
-
-const weekdaySelect=document.getElementById("weekdaySelect");
-const addWeekdayBtn=document.getElementById("addWeekdayBtn");
-
-const closedList=document.getElementById("closedList");
-
-let adminPassword="";
-
-const weekdayNames={
-  0:"Կիրակի",
-  1:"Երկուշաբթի",
-  2:"Երեքշաբթի",
-  3:"Չորեքշաբթի",
-  4:"Հինգշաբթի",
-  5:"Ուրբաթ",
-  6:"Շաբաթ"
-};
-
-loginBtn.onclick=async()=>{
-  adminPassword=passwordInput.value.trim();
-  if(!adminPassword){
-    statusMsg.textContent="❗ Մուտքագրեք գաղտնաբառ";
+  if (!adminPassword) {
+    showMessage(statusMsg, "❗ Մուտքագրեք գաղտնաբառը։", true);
     return;
   }
 
-  const ok=await loadBookings();
-  if(ok){
-    adminPanel.style.display="block";
-    statusMsg.textContent="✅ Մուտքը հաջող է";
-    passwordInput.value="";
-    loadClosedDays();
+  loginBtn.disabled = true;
+  showMessage(statusMsg, "Բեռնվում է...");
+
+  try {
+    const ok = await loadBookings();
+
+    if (ok) {
+      adminPanel.style.display = "block";
+      passwordInput.value = "";
+      showMessage(statusMsg, "✅ Մուտքը հաջող է։");
+      await loadClosedDays();
+    }
+  } catch (err) {
+    showMessage(statusMsg, "❌ " + err.message, true);
+  } finally {
+    loginBtn.disabled = false;
   }
 };
 
-refreshBtn.onclick=loadBookings;
+passwordInput.addEventListener("keydown", event => {
+  if (event.key === "Enter") loginBtn.click();
+});
 
-async function loadBookings(){
-  statusMsg.textContent="Բեռնվում է...";
-  try{
-    const res=await fetch(`${API_URL}/all-bookings`,{
-      method:"POST",
-      headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({password:adminPassword})
+refreshBtn.onclick = loadBookings;
+
+async function loadBookings() {
+  showMessage(bookingStatus, "Պատվերները բեռնվում են...");
+
+  try {
+    const res = await fetch(`${API_URL}/all-bookings`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ password: adminPassword })
     });
 
-    const data=await res.json();
+    const data = await readResponse(res);
 
-    if(!res.ok){
-      statusMsg.textContent="❌ "+data.message;
-      return false;
+    if (!Array.isArray(data)) {
+      throw new Error("Սերվերը վերադարձրել է սխալ տվյալներ։");
     }
 
-    bookingsBody.innerHTML="";
+    bookingsBody.replaceChildren();
 
-    if(!data.length){
-      bookingsBody.innerHTML=`<tr><td colspan="6">Պատվերներ չկան</td></tr>`;
-      statusMsg.textContent="📭 Պատվերներ չկան";
+    if (data.length === 0) {
+      const row = bookingsBody.insertRow();
+      const cell = row.insertCell();
+      cell.colSpan = 6;
+      cell.className = "empty";
+      cell.textContent = translateAdminMessage("Պատվերներ չկան։");
+      showMessage(bookingStatus, "📭 Պատվերներ չկան։");
       return true;
     }
 
-    data.sort((a,b)=>new Date(a.date+" "+a.time)-new Date(b.date+" "+b.time));
+    data.sort((a, b) =>
+      new Date(a.date + "T" + a.time) -
+      new Date(b.date + "T" + b.time)
+    );
 
-    data.forEach(b=>{
-      const row=document.createElement("tr");
-      row.innerHTML=`
-        <td>${b.id}</td>
-        <td>${b.name}</td>
-        <td>${b.phone}</td>
-        <td>${b.date}</td>
-        <td>${b.time}</td>
-        <td><button class="deleteBtn" onclick="deleteBooking (${b.id})">"🗑 Ջնջել"</button></td>
-      `;
-      bookingsBody.appendChild(row);
+    data.forEach(booking => {
+      const row = bookingsBody.insertRow();
+
+      [booking.id, booking.name, booking.phone,
+       booking.date, booking.time].forEach(value => {
+        const cell = row.insertCell();
+        cell.textContent = value ?? "";
+      });
+
+      const actionCell = row.insertCell();
+      const deleteButton = document.createElement("button");
+
+      deleteButton.className = "danger-btn";
+      deleteButton.textContent = translateAdminMessage("🗑 Ջնջել");
+      deleteButton.onclick = () => deleteBooking(booking.id);
+
+      actionCell.appendChild(deleteButton);
     });
 
-    statusMsg.textContent=`✅ Բեռնվեց (${data.length} պատվեր)`;
+    showMessage(bookingStatus, `✅ Բեռնվեց՝ ${data.length} պատվեր։`);
     return true;
 
-  }catch(err){
-    statusMsg.textContent="❌ Սերվերի սխալ";
+  } catch (err) {
+    showMessage(bookingStatus, "❌ " + err.message, true);
+    showMessage(statusMsg, "❌ Մուտքը չհաջողվեց։ Ստուգեք գաղտնաբառը կամ սերվերը։", true);
     return false;
   }
 }
 
-window.deleteBooking = async function(id){
-  if(!confirm("Վստա՞հ եք, որ ուզում եք ջնջել պատվերը")) return;
+async function deleteBooking(id) {
+  if (!confirm(translateAdminMessage("Վստա՞հ եք, որ ցանկանում եք ջնջել պատվերը։"))) return;
 
-  try{
-    const res=await fetch(`${API_URL}/delete-booking`,{
-      method:"POST",
-      headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({password:adminPassword,id})
+  try {
+    const res = await fetch(`${API_URL}/delete-booking`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ password: adminPassword, id })
     });
 
-    const data=await res.json();
+    await readResponse(res);
+    showMessage(bookingStatus, "✅ Պատվերը ջնջվեց։");
+    await loadBookings();
 
-    if(!res.ok){
-      alert("❌ "+data.message);
-      return;
-    }
-
-    alert("✅ Պատվերը ջնջվեց");
-    loadBookings();
-
-  }catch(err){
-    alert("❌ Սերվերի սխալ");
-  }
-};
-
-// -------- CLOSED DAYS --------
-
-async function loadClosedDays(){
-  try{
-    const res=await fetch(`${API_URL}/closed-days`);
-    const data=await res.json();
-
-    closedList.innerHTML="";
-
-    // weekdays
-    data.weekdays.forEach(day=>{
-      const div=document.createElement("div");
-      div.className="closed-item";
-      div.innerHTML=`
-        <span>📅 Փակ օր (շաբաթվա օր)՝ <b>${weekdayNames[day]}</b></span>
-        <button class="removeBtn" onclick="removeClosedDay('weekday', ${day})">✖</button>
-      `;
-      closedList.appendChild(div);
-    });
-
-    // dates
-    data.dates.forEach(date=>{
-      const div=document.createElement("div");
-      div.className="closed-item";
-      div.innerHTML=`
-        <span>📅 Փակ օր (ամսաթիվ)՝ <b>${date}</b></span>
-        <button class="removeBtn" onclick="removeClosedDay('date', '${date}')">✖</button>
-      `;
-      closedList.appendChild(div);
-    });
-
-    if(!data.weekdays.length && !data.dates.length){
-      closedList.innerHTML="<p>վոչ աշխատանքային օր</p>";
-    }
-
-  }catch(err){
-    closedList.innerHTML="<p>❌ Չհաջողվեց բեռնել փակ օրերը</p>";
+  } catch (err) {
+    showMessage(bookingStatus, "❌ " + err.message, true);
   }
 }
 
-addDateBtn.onclick = async ()=>{
+async function loadClosedDays() {
+  try {
+    const res = await fetch(`${API_URL}/closed-days`);
+    const data = await readResponse(res);
+
+    closedList.replaceChildren();
+
+    // Ցուցադրում ենք միայն կոնկրետ ամսաթվերը։
+    const dates = Array.isArray(data.dates) ? data.dates : [];
+
+    if (dates.length === 0) {
+      const empty = document.createElement("div");
+      empty.className = "empty";
+      empty.textContent = translateAdminMessage("Փակ ամսաթվեր չկան։");
+      closedList.appendChild(empty);
+      showMessage(closedStatus, "");
+      return;
+    }
+
+    dates.forEach(date => {
+      const item = document.createElement("div");
+      item.className = "closed-item";
+
+      const label = document.createElement("strong");
+      label.textContent = "📅 " + date;
+
+      const button = document.createElement("button");
+      button.className = "danger-btn";
+      button.textContent = translateAdminMessage("🗑 Ջնջել");
+      button.onclick = () => removeClosedDay(date);
+
+      item.append(label, button);
+      closedList.appendChild(item);
+    });
+
+    showMessage(closedStatus, `Ցուցակում կա ${dates.length} փակ ամսաթիվ։`);
+
+  } catch (err) {
+    showMessage(closedStatus, "❌ " + err.message, true);
+  }
+}
+
+addDateBtn.onclick = async () => {
   const date = closedDateInput.value;
-  if(!date){alert("Ընտրեք ամսաթիվ"); return;}
 
-  await fetch(`${API_URL}/add-closed-day`,{
-    method:"POST",
-    headers:{"Content-Type":"application/json"},
-    body:JSON.stringify({password:adminPassword,type:"date",value:date})
-  });
+  if (!date) {
+    alert(translateAdminMessage("Ընտրեք ամսաթիվ։"));
+    return;
+  }
 
-  closedDateInput.value="";
-  loadClosedDays();
+  addDateBtn.disabled = true;
+
+  try {
+    const res = await fetch(`${API_URL}/add-closed-day`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        password: adminPassword,
+        type: "date",
+        value: date
+      })
+    });
+
+    await readResponse(res);
+
+    closedDateInput.value = "";
+    await loadClosedDays();
+    alert(translateAdminMessage("✅ Ոչ աշխատանքային ամսաթիվը ավելացվեց։"));
+
+  } catch (err) {
+    alert(translateAdminMessage("❌ " + err.message));
+  } finally {
+    addDateBtn.disabled = false;
+  }
 };
 
-addWeekdayBtn.onclick = async ()=>{
-  const day = parseInt(weekdaySelect.value);
+async function removeClosedDay(date) {
+  if (!confirm(translateAdminMessage(`Հեռացնե՞լ ${date} փակ ամսաթիվը։`))) return;
 
-  await fetch(`${API_URL}/add-closed-day`,{
-    method:"POST",
-    headers:{"Content-Type":"application/json"},
-    body:JSON.stringify({password:adminPassword,type:"weekday",value:day})
-  });
+  try {
+    const res = await fetch(`${API_URL}/remove-closed-day`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        password: adminPassword,
+        type: "date",
+        value: date
+      })
+    });
 
-  loadClosedDays();
-};
+    await readResponse(res);
+    await loadClosedDays();
 
-window.removeClosedDay = async function(type,value){
-  await fetch(`${API_URL}/remove-closed-day`,{
-    method:"POST",
-    headers:{"Content-Type":"application/json"},
-    body:JSON.stringify({password:adminPassword,type,value})
-  });
+  } catch (err) {
+    showMessage(closedStatus, "❌ " + err.message, true);
+  }
+}
 
-  loadClosedDays();
-};
-
-setInterval(()=>{
-  if(adminPassword){
+setInterval(() => {
+  if (adminPassword && adminPanel.style.display === "block") {
     loadBookings();
   }
-},30000);
+}, 30000);
+</script>
 
+
+<script>
+let adminLanguage = "hy";
+const adminTranslations = {
+  hy: {
+    subtitle:"Ադմինիստրատորի վահանակ", adminLabel:"🛡️ Ադմին պանել", loginTitle:"Ադմին մուտք",
+    password:"Մուտքագրեք գաղտնաբառը", login:"⇥ Մուտք", security:"🛡️ Անվտանգ կառավարում",
+    securityText:"Մուտք գործեք ձեր գաղտնաբառով՝ պատվերներն ու ոչ աշխատանքային ամսաթվերը կառավարելու համար։",
+    orders:"Պատվերների ցուցակ", refresh:"⟳ Թարմացնել", name:"👤 Անուն", phone:"☎ Հեռախոս",
+    day:"▦ Օր", time:"◷ Ժամ", action:"Գործողություն", closedDays:"Ոչ աշխատանքային օրեր",
+    closeDate:" Փակել կոնկրետ ամսաթիվ", add:"＋ Ավելացնել", closedList:" Փակ օրերի ցուցակ",
+    loginRequired:"Մուտք գործեք՝ պատվերները տեսնելու համար։", noOrders:"Պատվերներ չկան։",
+    noClosed:"Փակ ամսաթվեր չկան։", closedPlaceholder:"Փակ օրերի ցուցակը կցուցադրվի այստեղ։",
+    delete:"🗑 Ջնջել", chooseDate:"Ընտրեք ամսաթիվ։", added:"✅ Ոչ աշխատանքային ամսաթիվը ավելացվեց։",
+    confirmDelete:"Վստա՞հ եք, որ ցանկանում եք ջնջել պատվերը։",
+    loading:"Բեռնվում է...", loaded:"Պատվերները բեռնվում են...", loginSuccess:"✅ Մուտքը հաջող է։",
+    loginError:"❌ Մուտքը չհաջողվեց։ Ստուգեք գաղտնաբառը կամ սերվերը։",
+    wrongPassword:"Սխալ գաղտնաբառ", serverError:"Սերվերի սխալ",
+    badData:"Սերվերը վերադարձրել է սխալ տվյալներ։", count:"Ցուցակում կա", closedCount:"փակ ամսաթիվ։",
+    bookingDeleted:"✅ Պատվերը ջնջվեց։", addedSuccess:"Ավելացվեց", removeDate:"Հեռացնե՞լ",
+    closedDate:"փակ ամսաթիվը։", bookingLoading:"Պատվերները բեռնվում են...",
+    noBookings:"📭 Պատվերներ չկան։", listEmpty:"Փակ օրերի ցուցակը կցուցադրվի այստեղ։"
+  },
+  ru: {
+    subtitle:"Панель администратора", adminLabel:"🛡️ Панель администратора", loginTitle:"Вход администратора",
+    password:"Введите пароль", login:"⇥ Войти", security:"🛡️ Безопасное управление",
+    securityText:"Войдите с паролем, чтобы управлять записями и нерабочими датами.",
+    orders:"Список записей", refresh:"⟳ Обновить", name:"👤 Имя", phone:"☎ Телефон",
+    day:"▦ Дата", time:"◷ Время", action:"Действие", closedDays:"Нерабочие дни",
+    closeDate:" Закрыть конкретную дату", add:"＋ Добавить", closedList:"Список закрытых дней",
+    loginRequired:"Войдите, чтобы увидеть записи.", noOrders:"Записей нет.",
+    noClosed:"Закрытых дат нет.", closedPlaceholder:"Список закрытых дней появится здесь.",
+    delete:"🗑 Удалить", chooseDate:"Выберите дату.", added:"✅ Нерабочая дата добавлена.",
+    confirmDelete:"Вы уверены, что хотите удалить запись?",
+    loading:"Загрузка...", loaded:"Загрузка записей...", loginSuccess:"✅ Вход выполнен.",
+    loginError:"❌ Не удалось войти. Проверьте пароль или сервер.",
+    wrongPassword:"Неверный пароль", serverError:"Ошибка сервера",
+    badData:"Сервер вернул неверные данные.", count:"В списке", closedCount:"закрытых дат.",
+    bookingDeleted:"✅ Запись удалена.", addedSuccess:"Добавлено", removeDate:"Удалить закрытую дату",
+    closedDate:"закрытую дату.", bookingLoading:"Загрузка записей...",
+    noBookings:"📭 Записей нет.", listEmpty:"Список закрытых дней появится здесь."
+  },
+  en: {
+    subtitle:"Administrator dashboard", adminLabel:"🛡️ Admin panel", loginTitle:"Admin login",
+    password:"Enter password", login:"⇥ Log in", security:"🛡️ Secure management",
+    securityText:"Log in with your password to manage bookings and non-working dates.",
+    orders:"Bookings list", refresh:"⟳ Refresh", name:"👤 Name", phone:"☎ Phone",
+    day:"▦ Date", time:"◷ Time", action:"Action", closedDays:"Non-working days",
+    closeDate:"Close a specific date", add:"＋ Add", closedList:" Closed dates list",
+    loginRequired:"Log in to view bookings.", noOrders:"No bookings.",
+    noClosed:"No closed dates.", closedPlaceholder:"The list of closed dates will appear here.",
+    delete:"🗑 Delete", chooseDate:"Choose a date.", added:"✅ Non-working date added.",
+    confirmDelete:"Are you sure you want to delete this booking?",
+    loading:"Loading...", loaded:"Loading bookings...", loginSuccess:"✅ Login successful.",
+    loginError:"❌ Login failed. Check the password or server.",
+    wrongPassword:"Incorrect password", serverError:"Server error",
+    badData:"The server returned invalid data.", count:"There are", closedCount:"closed dates in the list.",
+    bookingDeleted:"✅ Booking deleted.", addedSuccess:"Added", removeDate:"Remove",
+    closedDate:"closed date?", bookingLoading:"Loading bookings...",
+    noBookings:"📭 No bookings.", listEmpty:"The list of closed dates will appear here."
+  }
+};
+
+function translateAdminMessage(message) {
+  if (adminLanguage === "hy") return message;
+  const t = adminTranslations[adminLanguage];
+  const map = {
+    "Մուտք գործեք՝ պատվերները տեսնելու համար։":t.loginRequired,
+    "Պատվերներ չկան։":t.noOrders,
+    "Փակ ամսաթվեր չկան։":t.noClosed,
+    "Փակ օրերի ցուցակը կցուցադրվի այստեղ։":t.closedPlaceholder,
+    "🗑 Ջնջել":t.delete,
+    "Ընտրեք ամսաթիվ։":t.chooseDate,
+    "✅ Ոչ աշխատանքային ամսաթիվը ավելացվեց։":t.added,
+    "Վստա՞հ եք, որ ցանկանում եք ջնջել պատվերը։":t.confirmDelete,
+    "Սերվերի սխալ":t.serverError,
+    "Սխալ գաղտնաբառ":t.wrongPassword,
+    "❌ Մուտքը չհաջողվեց։ Ստուգեք գաղտնաբառը կամ սերվերը։":t.loginError,
+    "Պատվերները բեռնվում են...":t.bookingLoading,
+    "📭 Պատվերներ չկան։":t.noBookings,
+    "Բեռնվում է...":t.loading,
+    "Սերվերը վերադարձրել է սխալ տվյալներ։":t.badData,
+    "✅ Պատվերը ջնջվեց։":t.bookingDeleted,
+    "Գործողություն":t.action
+  };
+  for (const [hy, translated] of Object.entries(map)) {
+    if (message === hy) return translated;
+    if (message.includes(hy)) message = message.replace(hy, translated);
+  }
+  let match = message.match(/Ցուցակում կա (\d+) փակ ամսաթիվ։/);
+  if (match) return `${t.count} ${match[1]} ${t.closedCount}`;
+  match = message.match(/Բեռնվեց՝ (\d+) պատվեր։/);
+  if (match) return adminLanguage === "ru" ? `✅ Загружено записей: ${match[1]}.` : `✅ Loaded bookings: ${match[1]}.`;
+  if (message.startsWith("❌ ")) {
+    const err = message.slice(3);
+    if (err === "Database error") return "❌ " + t.serverError;
+  }
+  return message;
+}
+
+function changeAdminLanguage(lang) {
+  if (!adminTranslations[lang]) return;
+  adminLanguage = lang;
+  const t = adminTranslations[lang];
+  document.documentElement.lang = lang;
+  document.querySelector(".brand p").textContent = t.subtitle;
+  document.querySelector(".admin-label").textContent = t.adminLabel;
+  document.querySelector(".login-layout .section-title").lastChild.textContent = " " + t.loginTitle;
+  document.getElementById("passwordInput").placeholder = t.password;
+  document.getElementById("loginBtn").textContent = t.login;
+  document.querySelector(".info strong").textContent = t.security;
+  document.querySelector(".info").lastChild.textContent = "\n        " + t.securityText + "\n      ";
+  document.querySelector("#adminPanel .toolbar .section-title").lastChild.textContent = " " + t.orders;
+  document.getElementById("refreshBtn").textContent = t.refresh;
+  const th = document.querySelectorAll("thead th");
+  [ "ID", t.name, t.phone, t.day, t.time, t.action ].forEach((value,i)=>{if(th[i]) th[i].textContent=value;});
+  document.querySelector("#adminPanel > section:nth-of-type(2) .section-title").lastChild.textContent = " " + t.closedDays;
+  document.querySelector(".date-card .sub-title").lastChild.textContent = " " + t.closeDate;
+  document.getElementById("addDateBtn").textContent = t.add;
+  document.querySelector(".list-card .sub-title").lastChild.textContent = " " + t.closedList;
+  document.querySelectorAll(".language-switch button").forEach(button => button.classList.toggle("active", button.dataset.lang === lang));
+  // Translate any current messages and dynamically generated labels on next refresh.
+  if (adminPassword && adminPanel.style.display === "block") {
+    loadBookings();
+    loadClosedDays();
+  } else {
+    const empty = document.querySelector("#bookingsBody .empty");
+    if (empty) empty.textContent = t.loginRequired;
+    const closedEmpty = document.querySelector("#closedList .empty");
+    if (closedEmpty) closedEmpty.textContent = t.closedPlaceholder;
+  }
+}
+changeAdminLanguage("hy");
 </script>
 
 </body>
-
 </html>
-
-
 
