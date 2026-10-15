@@ -5,32 +5,32 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Barbershop</title>
 <link rel="stylesheet" href="tun.css">
+<style>
+.language-switch { display:flex; justify-content:center; align-items:center; gap:7px; flex-wrap:wrap; padding:8px; }
+.language-switch button { cursor:pointer; padding:7px 10px; border:1px solid #b99a58; border-radius:6px; background:transparent; color:inherit; font:inherit; }
+.language-switch button.active { background:#b99a58; color:#111; }
+</style>
 
 </head>
 
 <body>
-
-<header>
-    <p class="p"> CHARENC BARBERSHOP</p>
-   
-     <button  onclick="openNav()">Գրանցվել</button>
-    
-   <div id="mySidenav" class="sidenav">
-    
-  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">x</a>
-  <h4>Ընտրել վարսավիրին</h4>
-  <ol>
-      <li id="bookBtn">Սամվել Սարգսյան</li><br>
-    <li id="bookBtn">Արման Արամյան</li><br>
-    <li id="bookBtn">Արթուր Առաքելյան</li><br>
-    <li id="bookBtn">Վարթան Վառրթանյան</li> 
-  </ol>
+<div class="language-switch" aria-label="Language">
+  <button type="button" onclick="changeLanguage('hy')" data-lang="hy">🇦🇲 Հայերեն</button>
+  <button type="button" onclick="changeLanguage('ru')" data-lang="ru">🇷🇺 Русский</button>
+  <button type="button" onclick="changeLanguage('en')" data-lang="en">🇬🇧 English</button>
 </div>
+<button id="bookBtn" >Գրանցվել</button>
+<header>
+    <p class="p" id="p"> CHARENC BARBERSHOP</p>
+   
+     
+  
 </header>
 
 
 
 <div id="bookingModal">
+  <img class="dd" src="img/barber.jpeg" alt="">
 <label>Անուն</label><input type="text" id="nameInput" placeholder="Անուն"/>
 <label>Հեռախոս</label><input type="text" id="phoneInput" placeholder="հեռախոսահամարը՝ 077123456"/>
 <label>Օր</label><select id="daySelect"></select>
@@ -49,7 +49,7 @@
 <div class="text1">
      <div class="text2">  
         <div class="card">
-            <img src="public/img/mens-hair-cut-min.jpg" alt="">
+            <img src="img/mens-hair-cut-min.jpg" alt="">
             <h3>Տղամարդու սանրվածք</h3>
             <p>Ժամանակակից ոճ</p>
             <p><strong>3000 ֏</strong></p>
@@ -57,14 +57,14 @@
         </div>
         
         <div class="card">
-            <img src="public/img/Picsart_24-06-06_10-03-38-354-scaled.jpg">
+            <img src="img/Picsart_24-06-06_10-03-38-354-scaled.jpg">
             <h3>Մորուք</h3>
             <p>Մոդելավորում</p>
             <p><strong>2000 ֏</strong></p>
         </div>
         
         <div class="card">
-            <img src="public/img/images.jpg">
+            <img src="img/images.jpg">
             <h3>VIP Փաթեթ</h3>
             <p>Լիարժեք խնամք</p>
             <p><strong>5000 ֏</strong></p>
@@ -113,18 +113,9 @@
 </div>
 
 <script>
-function openNav() {
-  if (window.innerWidth < 768) {
-    document.getElementById("mySidenav").style.width = "100%";
-  } else {
-    document.getElementById("mySidenav").style.width = "480px";
-  }
-}
 
-function closeNav() {
-  document.getElementById("mySidenav").style.width = "0";
-}
-const API_URL = "/api";
+const API_URL = "https://barbershop-9qbq.onrender.com/api";
+
 const bookBtn=document.getElementById("bookBtn");
 const modal=document.getElementById("bookingModal");
 const closeModal=document.getElementById("closeModal");
@@ -138,7 +129,7 @@ const phoneInput=document.getElementById("phoneInput");
   let closedWeekdays = [];
 let closedDates = [];
 function showAlert(message, type) {
-  statusMsg.textContent = message;
+  statusMsg.textContent = translateDynamicMessage(message);
   statusMsg.className = "alert " + type;
   statusMsg.style.display = "block";
 
@@ -173,7 +164,8 @@ async function loadNextWeekDays(){
 
     let value=d.toISOString().split("T")[0];
     let weekday=d.getDay(); // 0-6
-    let label=d.toLocaleDateString("hy-AM",{weekday:"long",year:"numeric",month:"long",day:"numeric"});
+    let locale = currentLang === "ru" ? "ru-RU" : currentLang === "en" ? "en-US" : "hy-AM";
+    let label=d.toLocaleDateString(locale,{weekday:"long",year:"numeric",month:"long",day:"numeric"});
 
     let option=document.createElement("option");
     option.value=value;
@@ -181,7 +173,7 @@ async function loadNextWeekDays(){
 
     if(closedWeekdays.includes(String(weekday)) || closedDates.includes(value)){
       option.disabled=true;
-      option.textContent += " (Ոչ աշխատանքային)";
+      option.textContent += " (" + translations[currentLang].closedDay + ")";
     }
 
     daySelect.appendChild(option);
@@ -195,8 +187,8 @@ timeSelect.innerHTML="";
 const selectedDate=daySelect.value;
 const allSlots=generateAllSlots();
 try{const res=await fetch(`${API_URL}/bookings?date=${selectedDate}`);const bookedTimes=await res.json();
-allSlots.forEach(slot=>{const option=document.createElement("option");option.value=slot;if(bookedTimes.includes(slot)){option.textContent=`${slot} (զբաղված է)`;option.disabled=true;}else{option.textContent=slot;}timeSelect.appendChild(option);});
-}catch(err){showAlert("❌ " + data.message, "error");}
+allSlots.forEach(slot=>{const option=document.createElement("option");option.value=slot;if(bookedTimes.includes(slot)){option.textContent=`${slot} (${translations[currentLang].booked})`;option.disabled=true;}else{option.textContent=slot;}timeSelect.appendChild(option);});
+ }catch(err){showAlert("❌ Սերվերի խնդիր", "error");}
 }
 
 confirmBooking.onclick = async () => {
@@ -222,7 +214,7 @@ confirmBooking.onclick = async () => {
     const data = await res.json();
 
     if (res.ok) {
-      statusMsg.textContent="✅ Պատվերը հաջողությամբ ընդունվեց";
+      statusMsg.textContent = "✅ " + translations[currentLang].bookingSuccess;
       await loadTimesWithAvailability();
     } else {
       showAlert("❌ " + data.message, "error");
@@ -235,16 +227,107 @@ confirmBooking.onclick = async () => {
 </script>
 
 
+
+<script>
+let currentLang = "hy";
+const translations = {
+  hy: {
+    book:"Գրանցվել", name:"Անուն", phone:"Հեռախոս", phonePlaceholder:"հեռախոսահամարը՝ 077123456",
+    day:"Օր", time:"Ժամ", confirm:"Հաստատել", close:"Փակել",
+    title:"Քո ոճը սկսվում է այստեղ",
+    paragraph:`Մեզ համար սանրվածքը պարզապես ծառայություն չէ — դա արվեստ է։
+Մենք ստեղծում ենք կերպար, որը արտահայտում է քո վստահությունը, քո բնավորությունը և քո անհատականությունը։
+<br><br>Մեր վարպետները աշխատում են բարձր ճշգրտությամբ և ժամանակակից տեխնիկաներով՝ ապահովելով մաքուր գծեր, կատարյալ անցումներ և մանրուքների նկատմամբ ուշադրություն։ Յուրաքանչյուր հաճախորդ ստանում է անհատական մոտեցում, խորհրդատվություն և այնպիսի արդյունք, որը երկար կմնա կատարյալ։
+<br><br>Մենք առաջարկում ենք՝<br>✔ Ժամանակակից և դասական սանրվածքներ<br>✔ Մաքուր և պրոֆեսիոնալ սափրում<br>✔ Մորուքի ձևավորում և խնամք<br>✔ Մանկական սանրվածքներ<br>✔ Premium սպասարկում հարմարավետ միջավայրում<br><br>Մեր միջավայրը ստեղծված է, որպեսզի դու քեզ զգաս վստահ և հանգիստ։ Մաքուր տարածք, որակյալ գործիքներ և պրոֆեսիոնալ մոտեցում՝ յուրաքանչյուր այցը դարձնելով հաճելի փորձառություն։
+<br><br>💬 Մենք չենք պարզապես կտրում մազերը։ Մենք ստեղծում ենք քո նոր կերպարը։
+<br><br>📅 Ամրագրիր քո այցը այսօր և զգա իրական barber փորձը։`,
+    services:["Տղամարդու սանրվածք","Մորուք","VIP Փաթեթ"],
+    descriptions:["Ժամանակակից ոճ","Մոդելավորում","Լիարժեք խնամք"],
+    address:"Մեր հասցեն է քաղաք ` Չարենցավան `", closedDay:"Ոչ աշխատանքային", booked:"զբաղված է",
+    bookingSuccess:"Պատվերը հաջողությամբ ընդունվեց", required:"Լրացրեք բոլոր դաշտերը",
+    sending:"Ուղարկվում է...", serverError:"Սերվերի խնդիր"
+  },
+  ru: {
+    book:"Записаться", name:"Имя", phone:"Телефон", phonePlaceholder:"номер телефона: 077123456",
+    day:"Дата", time:"Время", confirm:"Подтвердить", close:"Закрыть",
+    title:"Твой стиль начинается здесь",
+    paragraph:`Для нас стрижка — это не просто услуга, а искусство. Мы создаём образ, который отражает твою уверенность, характер и индивидуальность.
+<br><br>Наши мастера работают с высокой точностью и используют современные техники, обеспечивая чистые линии, идеальные переходы и внимание к деталям. Каждый клиент получает индивидуальный подход, консультацию и результат, который долго остаётся безупречным.
+<br><br>Мы предлагаем:<br>✔ Современные и классические стрижки<br>✔ Чистое и профессиональное бритьё<br>✔ Моделирование и уход за бородой<br>✔ Детские стрижки<br>✔ Премиальное обслуживание в комфортной обстановке
+<br><br>Наша атмосфера создана для того, чтобы ты чувствовал себя уверенно и спокойно. Чистое пространство, качественные инструменты и профессиональный подход превращают каждый визит в приятный опыт.
+<br><br>💬 Мы не просто стрижём волосы. Мы создаём твой новый образ.
+<br><br>📅 Запишись сегодня и почувствуй настоящий barber-сервис!`,
+    services:["Мужская стрижка","Борода","VIP-пакет"],
+    descriptions:["Современный стиль","Моделирование бороды","Комплексный уход"],
+    address:"Наш адрес: город Чаренцаван", closedDay:"нерабочий день", booked:"занято",
+    bookingSuccess:"Запись успешно оформлена", required:"Заполните все поля",
+    sending:"Отправка...", serverError:"Проблема с сервером"
+  },
+  en: {
+    book:"Book now", name:"Name", phone:"Phone", phonePlaceholder:"phone number: 077123456",
+    day:"Date", time:"Time", confirm:"Confirm", close:"Close",
+    title:"Your style starts here",
+    paragraph:`For us, a haircut is more than a service — it is an art. We create a look that reflects your confidence, character, and individuality.
+<br><br>Our barbers work with precision and modern techniques, creating clean lines, seamless fades, and attention to every detail. Each client receives personal attention, advice, and a result that stays looking great.
+<br><br>We offer:<br>✔ Modern and classic haircuts<br>✔ Clean, professional shaving<br>✔ Beard styling and care<br>✔ Children's haircuts<br>✔ Premium service in a comfortable setting
+<br><br>Our space is designed to help you feel confident and relaxed. A clean environment, quality tools, and a professional approach make every visit enjoyable.
+<br><br>💬 We don't just cut hair. We create your new look.
+<br><br>📅 Book your visit today and experience a true barber service!`,
+    services:["Men's haircut","Beard","VIP Package"],
+    descriptions:["Modern style","Beard styling","Complete grooming"],
+    address:"Our address: Charentsavan", closedDay:"non-working day", booked:"booked",
+    bookingSuccess:"Your booking was successful", required:"Please fill in all fields",
+    sending:"Sending...", serverError:"Server problem"
+  }
+};
+
+function translateDynamicMessage(message) {
+  if (currentLang === "hy") return message;
+  const t = translations[currentLang];
+  const map = {
+    "❌ Լրացրեք բոլոր դաշտերը":"❌ " + t.required,
+    "⏳ Ուղարկվում է...":"⏳ " + t.sending,
+    "❌ Սերվերի խնդիր":"❌ " + t.serverError,
+    "Բոլոր դաշտերը պարտադիր են":t.required,
+    "Այս օրը փակ է":t.closedDay,
+    "Ժամը արդեն զբաղված է":t.booked
+  };
+  for (const [hy, translated] of Object.entries(map)) {
+    if (message.includes(hy)) message = message.replace(hy, translated);
+  }
+  return message;
+}
+
+function changeLanguage(lang) {
+  if (!translations[lang]) return;
+  currentLang = lang;
+  const t = translations[lang];
+  document.documentElement.lang = lang;
+  document.getElementById("bookBtn").textContent = t.book;
+  document.getElementById("confirmBooking").textContent = t.confirm;
+  document.getElementById("closeModal").textContent = t.close;
+  const labels = document.querySelectorAll("#bookingModal label");
+  [t.name, t.phone, t.day, t.time].forEach((text, i) => { if (labels[i]) labels[i].textContent = text; });
+  document.getElementById("nameInput").placeholder = t.name;
+  document.getElementById("phoneInput").placeholder = t.phonePlaceholder;
+  document.querySelector(".text h1").textContent = t.title;
+  document.querySelector(".text p").innerHTML = t.paragraph;
+  document.querySelectorAll(".text2 .card").forEach((card, i) => {
+    if (t.services[i]) card.querySelector("h3").textContent = t.services[i];
+    const p = card.querySelectorAll("p");
+    if (p[0] && t.descriptions[i]) p[0].textContent = t.descriptions[i];
+  });
+  document.querySelector(".hasc").textContent = t.address;
+  document.querySelectorAll(".language-switch button").forEach(button => {
+    button.classList.toggle("active", button.dataset.lang === lang);
+  });
+  if (daySelect.options.length) loadNextWeekDays().then(loadTimesWithAvailability);
+}
+changeLanguage("hy");
+</script>
+
 </body>
 </html>
-
-
-
-
-
-
-
-
 
 
 
