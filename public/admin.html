@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="hy">
 <head>
@@ -18,9 +17,12 @@
 }
 
 * { box-sizing: border-box; }
-.language-switch { display:flex; gap:6px; flex-wrap:wrap; align-items:center; }
-.language-switch button { cursor:pointer; padding:7px 9px; border:1px solid #ffffff70; border-radius:8px; background:#ffffff12; color:white; font:inherit; }
-.language-switch button.active { background:#fff; color:#1d3155; }
+.language-switch { position:relative; display:inline-block; z-index:1000; }
+.language-switch summary { list-style:none; cursor:pointer; padding:8px 11px; border:1px solid #ffffff70; border-radius:8px; background:#ffffff12; color:white; font:inherit; white-space:nowrap; }
+.language-switch summary::-webkit-details-marker { display:none; }
+.language-menu { position:absolute; right:0; top:calc(100% + 4px); min-width:145px; display:flex; flex-direction:column; gap:4px; padding:6px; background:#1d3155; border:1px solid #ffffff70; border-radius:8px; box-shadow:0 6px 18px #0005; }
+.language-menu button { cursor:pointer; text-align:left; padding:8px 9px; border:0; border-radius:6px; background:transparent; color:white; font:inherit; white-space:nowrap; }
+.language-menu button:hover, .language-menu button.active { background:#fff; color:#1d3155; }
 
 body {
   margin: 0;
@@ -275,11 +277,14 @@ tbody tr:hover { background: #eaf2ff; }
     </div>
   </div>
   <div class="admin-label">🛡️ Ադմին պանել</div>
-  <div class="language-switch" aria-label="Language">
-    <button type="button" onclick="changeAdminLanguage('hy')" data-lang="hy">🇦🇲 Հայերեն</button>
-    <button type="button" onclick="changeAdminLanguage('ru')" data-lang="ru">🇷🇺 Русский</button>
-    <button type="button" onclick="changeAdminLanguage('en')" data-lang="en">🇬🇧 English</button>
-  </div>
+  <details class="language-switch">
+    <summary id="adminLanguageButton">🌐 Լեզու ▾</summary>
+    <div class="language-menu" aria-label="Language">
+      <button type="button" onclick="changeAdminLanguage('hy')" data-lang="hy">🇦🇲 Հայերեն</button>
+      <button type="button" onclick="changeAdminLanguage('ru')" data-lang="ru">🇷🇺 Русский</button>
+      <button type="button" onclick="changeAdminLanguage('en')" data-lang="en">🇬🇧 English</button>
+    </div>
+  </details>
 </header>
 
 <main class="container">
@@ -667,7 +672,7 @@ const adminTranslations = {
     securityText:"Log in with your password to manage bookings and non-working dates.",
     orders:"Bookings list", refresh:"⟳ Refresh", name:"👤 Name", phone:"☎ Phone",
     day:"▦ Date", time:"◷ Time", action:"Action", closedDays:"Non-working days",
-    closeDate:"Close a specific date", add:"＋ Add", closedList:" Closed dates list",
+    closeDate:" Close a specific date", add:"＋ Add", closedList:"Closed dates list",
     loginRequired:"Log in to view bookings.", noOrders:"No bookings.",
     noClosed:"No closed dates.", closedPlaceholder:"The list of closed dates will appear here.",
     delete:"🗑 Delete", chooseDate:"Choose a date.", added:"✅ Non-working date added.",
@@ -739,7 +744,10 @@ function changeAdminLanguage(lang) {
   document.querySelector(".date-card .sub-title").lastChild.textContent = " " + t.closeDate;
   document.getElementById("addDateBtn").textContent = t.add;
   document.querySelector(".list-card .sub-title").lastChild.textContent = " " + t.closedList;
-  document.querySelectorAll(".language-switch button").forEach(button => button.classList.toggle("active", button.dataset.lang === lang));
+  const languageNames = { hy: "🇦🇲 Հայերեն", ru: "🇷🇺 Русский", en: "🇬🇧 English" };
+  document.getElementById("adminLanguageButton").textContent = languageNames[lang] + " ▾";
+  document.querySelectorAll(".language-menu button").forEach(button => button.classList.toggle("active", button.dataset.lang === lang));
+  document.querySelector(".language-switch").open = false;
   // Translate any current messages and dynamically generated labels on next refresh.
   if (adminPassword && adminPanel.style.display === "block") {
     loadBookings();
@@ -756,4 +764,3 @@ changeAdminLanguage("hy");
 
 </body>
 </html>
-
