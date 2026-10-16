@@ -26,25 +26,13 @@ let closedDates = [];    // օրինակ ["2026-02-25"]
 // PostgreSQL connection
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
-  ssl: process.env.NODE_ENV === "production"
-    ? { rejectUnauthorized: false }
-    : false
+  ssl: process.env.DATABASE_URL.includes("localhost")
+    ? false
+    : { rejectUnauthorized: false }
 });
 
 // ստեղծում ենք bookings table եթե չկա
-pool.query(`
-  CREATE TABLE IF NOT EXISTS bookings (
-    id BIGINT PRIMARY KEY,
-    name TEXT,
-    phone TEXT,
-    date TEXT,
-    time TEXT
-  )
-`).then(() => {
-  console.log("✅ Table ready");
-}).catch(err => {
-  console.error("❌ Table creation error:", err);
-});
+
 
 
 // ================= BOOKINGS =================
@@ -199,8 +187,24 @@ async function cleanOldBookings() {
   }
 }
 
-cleanOldBookings();
-setInterval(cleanOldBookings, 5 * 60 * 1000);
+pool.query(`
+  CREATE TABLE IF NOT EXISTS bookings (
+    id BIGINT PRIMARY KEY,
+    name TEXT,
+    phone TEXT,
+    date TEXT,
+    time TEXT
+  )
+`).then(async () => {
+  console.log("✅ Table ready");
+
+  await cleanOldBookings();
+
+  setInterval(cleanOldBookings, 5 * 60 * 1000);
+
+}).catch(err => {
+  console.error("❌ Database initialization error:", err);
+});
 
 
 // ================= SERVER =================
@@ -208,8 +212,6 @@ setInterval(cleanOldBookings, 5 * 60 * 1000);
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
-  console.log("🚀 Server running on port " + PORT);
+    console.log("🚀 Server running on port " + PORT);
 });
-
-
 
