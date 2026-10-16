@@ -6,19 +6,20 @@
 <title>Barbershop</title>
 <link rel="stylesheet" href="tun.css">
 <style>
-.language-switch { display:flex; justify-content:center; align-items:center; gap:7px; flex-wrap:wrap; padding:8px; }
-.language-switch button { cursor:pointer; padding:7px 10px; border:1px solid #b99a58; border-radius:6px; background:transparent; color:inherit; font:inherit; }
-.language-switch button.active { background:#b99a58; color:#111; }
+
 </style>
 
 </head>
 
 <body>
-<div class="language-switch" aria-label="Language">
-  <button type="button" onclick="changeLanguage('hy')" data-lang="hy">🇦🇲 Հայերեն</button>
-  <button type="button" onclick="changeLanguage('ru')" data-lang="ru">🇷🇺 Русский</button>
-  <button type="button" onclick="changeLanguage('en')" data-lang="en">🇬🇧 English</button>
-</div>
+<details class="language-switch">
+  <summary id="languageButton">🌐 Լեզու ▾</summary>
+  <div class="language-menu" aria-label="Language">
+    <button type="button" onclick="changeLanguage('hy')" data-lang="hy">🇦🇲 Հայերեն</button>
+    <button type="button" onclick="changeLanguage('ru')" data-lang="ru">🇷🇺 Русский</button>
+    <button type="button" onclick="changeLanguage('en')" data-lang="en">🇬🇧 English</button>
+  </div>
+</details>
 <button id="bookBtn" >Գրանցվել</button>
 <header>
     <p class="p" id="p"> CHARENC BARBERSHOP</p>
@@ -30,7 +31,7 @@
 
 
 <div id="bookingModal">
-  <img class="dd" src="public/img/barber.jpeg" alt="">
+  <img class="dd" src="img/barber.jpeg" alt="">
 <label>Անուն</label><input type="text" id="nameInput" placeholder="Անուն"/>
 <label>Հեռախոս</label><input type="text" id="phoneInput" placeholder="հեռախոսահամարը՝ 077123456"/>
 <label>Օր</label><select id="daySelect"></select>
@@ -49,22 +50,22 @@
 <div class="text1">
      <div class="text2">  
         <div class="card">
-            <img src="public/img/mens-hair-cut-min.jpg" alt="">
+            <img src="img/mens-hair-cut-min.jpg" alt="">
             <h3>Տղամարդու սանրվածք</h3>
             <p>Ժամանակակից ոճ</p>
-            <p><strong>3000 ֏</strong></p>
+       <p><strong>3000 ֏</strong></p>
             
         </div>
         
         <div class="card">
-            <img src="public/img/Picsart_24-06-06_10-03-38-354-scaled.jpg">
+            <img src="img/Picsart_24-06-06_10-03-38-354-scaled.jpg">
             <h3>Մորուք</h3>
             <p>Մոդելավորում</p>
             <p><strong>2000 ֏</strong></p>
         </div>
         
         <div class="card">
-            <img src="public/img/images.jpg">
+            <img src="img/images.jpg">
             <h3>VIP Փաթեթ</h3>
             <p>Լիարժեք խնամք</p>
             <p><strong>5000 ֏</strong></p>
@@ -241,7 +242,7 @@ const translations = {
 <br><br>Մենք առաջարկում ենք՝<br>✔ Ժամանակակից և դասական սանրվածքներ<br>✔ Մաքուր և պրոֆեսիոնալ սափրում<br>✔ Մորուքի ձևավորում և խնամք<br>✔ Մանկական սանրվածքներ<br>✔ Premium սպասարկում հարմարավետ միջավայրում<br><br>Մեր միջավայրը ստեղծված է, որպեսզի դու քեզ զգաս վստահ և հանգիստ։ Մաքուր տարածք, որակյալ գործիքներ և պրոֆեսիոնալ մոտեցում՝ յուրաքանչյուր այցը դարձնելով հաճելի փորձառություն։
 <br><br>💬 Մենք չենք պարզապես կտրում մազերը։ Մենք ստեղծում ենք քո նոր կերպարը։
 <br><br>📅 Ամրագրիր քո այցը այսօր և զգա իրական barber փորձը։`,
-    services:["Տղամարդու սանրվածք","Մորուք","VIP Փաթեթ"],
+    services:["3000դ","Տղամարդու սանրվածք","Մորուք","VIP Փաթեթ"],
     descriptions:["Ժամանակակից ոճ","Մոդելավորում","Լիարժեք խնամք"],
     address:"Մեր հասցեն է քաղաք ` Չարենցավան `", closedDay:"Ոչ աշխատանքային", booked:"զբաղված է",
     bookingSuccess:"Պատվերը հաջողությամբ ընդունվեց", required:"Լրացրեք բոլոր դաշտերը",
@@ -257,7 +258,7 @@ const translations = {
 <br><br>Наша атмосфера создана для того, чтобы ты чувствовал себя уверенно и спокойно. Чистое пространство, качественные инструменты и профессиональный подход превращают каждый визит в приятный опыт.
 <br><br>💬 Мы не просто стрижём волосы. Мы создаём твой новый образ.
 <br><br>📅 Запишись сегодня и почувствуй настоящий barber-сервис!`,
-    services:["Мужская стрижка","Борода","VIP-пакет"],
+    services:["3000р","Мужская стрижка","Борода","VIP-пакет"],
     descriptions:["Современный стиль","Моделирование бороды","Комплексный уход"],
     address:"Наш адрес: город Чаренцаван", closedDay:"нерабочий день", booked:"занято",
     bookingSuccess:"Запись успешно оформлена", required:"Заполните все поля",
@@ -318,15 +319,19 @@ function changeLanguage(lang) {
     if (p[0] && t.descriptions[i]) p[0].textContent = t.descriptions[i];
   });
   document.querySelector(".hasc").textContent = t.address;
-  document.querySelectorAll(".language-switch button").forEach(button => {
+  const languageNames = { hy: "🇦🇲 Հայերեն", ru: "🇷🇺 Русский", en: "🇬🇧 English" };
+  document.getElementById("languageButton").textContent = languageNames[lang] + " ▾";
+  document.querySelectorAll(".language-menu button").forEach(button => {
     button.classList.toggle("active", button.dataset.lang === lang);
   });
+  document.querySelector(".language-switch").open = false;
   if (daySelect.options.length) loadNextWeekDays().then(loadTimesWithAvailability);
 }
 changeLanguage("hy");
 </script>
 
 </body>
+
 </html>
 
 
