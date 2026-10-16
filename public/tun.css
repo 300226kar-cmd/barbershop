@@ -3,21 +3,39 @@ body {
   color: white;
   background-color: #252121b8;
 }
+.language-switch { position:relative; display:inline-block; padding:8px; z-index:1000; }
+.language-switch summary { list-style:none; cursor:pointer; padding:8px 12px; border:1px solid #b99a58; border-radius:6px; background:#171717; color:#fff; font:inherit; white-space:nowrap; }
+.language-switch summary::-webkit-details-marker { display:none; }
+.language-menu { position:absolute; top:calc(100% - 2px); left:8px; min-width:145px; display:flex; flex-direction:column; gap:4px; padding:6px; background:#171717; border:1px solid #b99a58; border-radius:7px; box-shadow:0 6px 18px #0005; }
+.language-menu button { cursor:pointer; text-align:left; padding:8px 10px; border:0; border-radius:5px; background:transparent; color:#fff; font:inherit; white-space:nowrap; }
+.language-menu button:hover, .language-menu button.active { background:#b99a58; color:#111; }
+.dd{ 
+  border-radius: 10px;
+  height: 190px;
 
+}
+#bookBtn{
+  position: fixed;
+  margin-left: 80%;
+  margin-top: 18px;
+  z-index: 1;
+}
 button {
+  width: 140px;
   float: right;
   box-shadow: -3px 5px 5px #130e0e;
   height: 50px;
   text-align: center;
   border-radius: 15px;
   cursor: pointer;
-  font-size: 20px;
+  font-size: 22px;
   border: 2px solid #232222;
   background: rgb(88, 85, 85);
   color: white;
   padding: 10px;
   margin-bottom: 5px;
 }
+
 .p{
   display: inline;
 }
@@ -27,47 +45,21 @@ button:active {
 }
 
 
-.sidenav {
-  height: 43%;
-  width: 0;
-  border-radius: 15px;
-  position: fixed;
-  z-index: 1;
-  top: 100px;
-  right: 0;
-  background-color: #3f3d3d;
-  overflow-x: hidden;
-  transition: 0.5s;
-  padding-top: 60px;
-}
-.sidenav ol {
-  text-align: left;
-  margin: 20px;
-  text-decoration: none;
-  font-size: 22px;
-  color: #fffefe;
-  display: block;
-  transition: 0.3s;
-  cursor: pointer;
-}
+
+
  
-  .sidenav .closebtn {
+  .closebtn {
     position: absolute;
     top: 10px;
     right: 15px;
     font-size: 35px;
     margin-left: 18px;
     color: rgb(253, 150, 150); 
+   
     }
     
     
-    .sidenav li:hover {
-  color: #95b6fc;
-}
-    #mySidenav a:hover {
-      color: #e90606;
-    }
-    
+ 
 .text {
   position: relative;
   letter-spacing: 3px;
@@ -92,13 +84,13 @@ button:active {
 }
 h1 {
   text-align: center;
+
 }
 h4{
   font-size: 22px;
   margin-bottom: 45px;
 }
 header {
-  
   overflow: hidden;
   background: #605d5d;
   padding: 20px;
@@ -107,7 +99,11 @@ header {
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 7px;
-  text-shadow: -8px 8px 4px black;
+  text-shadow: -8px 8px 4px rgb(5, 5, 5);
+}
+header>p{
+  color: #d8b878;
+  font-size: 65PX;
 }
 #bookingModal {
   z-index: 1;
@@ -144,6 +140,7 @@ select {
 #closeModal {
   background: #0f4daa;
   flex: 1;
+ 
 }
 #statusMsg {
   margin-top: 12px;
@@ -151,13 +148,13 @@ select {
 }
 
 .hero {
-  background: url("public/img/andrea-donato-MNu0n-3BIKs-unsplash__FocusFillWyIwLjAwIiwiMC4wMCIsMTEwMCw1Mjld.jpg")
+  background: url("img/andrea-donato-MNu0n-3BIKs-unsplash__FocusFillWyIwLjAwIiwiMC4wMCIsMTEwMCw1Mjld.jpg")
     center/cover no-repeat;
   height: 450px;
   font-size: 35px;
   margin: 0;
   border-radius: 20px;
-  color: #ffffff;
+  color:#faf9f9;
 }
 
 .card {
@@ -201,27 +198,16 @@ select {
   align-items: center;
 }
 
+
 #lightbox img {
   max-width: 90%;
   max-height: 90%;
   border-radius: 20px;
 }
 
-#statusMsg {
-  color: #3184ff;
-  margin-top: 12px;
-  font-size: 14px;
-}
 
 @media  (max-width: 1200px) and (min-width: 1000px) {
-  .sidenav .closebtn {
-    font-size: 30px;
-    margin-right: 30px;
-    color: red;
-  }
-  .sidenav ol{
-    font-size:18px ;
-  }
+ 
   .text{
     font-size:23px ;
   }
@@ -293,9 +279,7 @@ font-size: 25px;
  button{
   font-size: 15px;
  }
- .sidenav>ol{
-  font-size: 18px;
- }
+
   .card{
     width: 170px;
     font-size: 13px;
@@ -332,16 +316,6 @@ font-size: 25px;
 
  
  }
-   #mySidenav{
-  height: auto;
- }
- .sidenav>ol{
-  font-size: 13px;
- }
- .sidenav .closebtn{
-  font-size: 25px;
-  padding: 15px;
- }
   .card{
     margin: 5px;
     padding: 7px;
@@ -353,9 +327,8 @@ font-size: 25px;
     height:100px ;
   }
   .text{
-    font-size: 10px;
+    font-size: 8px;
    padding: 7px;
-    letter-spacing: 0px;
   }
   .hasc{
     font-size: 12px;
@@ -367,12 +340,6 @@ font-size: 25px;
     font-size:15px ;
   }
 }
-
-
-
-
-
-
 
 
 
