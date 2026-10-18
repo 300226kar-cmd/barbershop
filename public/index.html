@@ -50,7 +50,7 @@
 <div class="text1">
      <div class="text2">  
         <div class="card">
-            <img src="img/mens-hair-cut-min.jpg" alt="">
+            <img src="public/img/mens-hair-cut-min.jpg" alt="">
             <h3>Տղամարդու սանրվածք</h3>
             <p>Ժամանակակից ոճ</p>
        <p><strong class="service-price"
@@ -61,7 +61,7 @@
         </div>
         
         <div class="card">
-            <img src="img/Picsart_24-06-06_10-03-38-354-scaled.jpg">
+            <img src="public/img/Picsart_24-06-06_10-03-38-354-scaled.jpg">
             <h3>Մորուք</h3>
             <p>Մոդելավորում</p>
            <p><strong class="service-price"
@@ -71,7 +71,7 @@
         </div>
         
         <div class="card">
-            <img src="img/images.jpg">
+            <img src="public/img/images.jpg">
             <h3>VIP Փաթեթ</h3>
             <p>Լիարժեք խնամք</p>
          <p><strong class="service-price"
@@ -322,8 +322,9 @@ function translateDynamicMessage(message) {
 
 function changeLanguage(lang) {
   if (!translations[lang]) return;
-  currentLang = lang;
-  const t = translations[lang];
+ currentLang = lang;
+const t = translations[lang];
+changeCurrency(lang);
   document.documentElement.lang = lang;
   document.getElementById("bookBtn").textContent = t.book;
   document.getElementById("confirmBooking").textContent = t.confirm;
