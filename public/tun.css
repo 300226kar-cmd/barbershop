@@ -15,10 +15,10 @@ body {
 
 }
 #bookBtn{
-  position: fixed;
-  margin-left: 80%;
-  margin-top: 18px;
-  z-index: 1;
+position: fixed;
+right: 20px;
+top: 18px;
+z-index: 1000;
 }
 button {
   width: 140px;
@@ -103,7 +103,6 @@ header {
 }
 header>p{
   color: #d8b878;
-  font-size: 65PX;
 }
 #bookingModal {
   z-index: 1;
