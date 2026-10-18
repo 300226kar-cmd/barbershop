@@ -50,25 +50,34 @@
 <div class="text1">
      <div class="text2">  
         <div class="card">
-            <img src="public/img/mens-hair-cut-min.jpg" alt="">
+            <img src="img/mens-hair-cut-min.jpg" alt="">
             <h3>Տղամարդու սանրվածք</h3>
             <p>Ժամանակակից ոճ</p>
-       <p><strong>3000 ֏</strong></p>
+       <p><strong class="service-price"
+   data-amd="3000"
+   data-rub="600"
+   data-usd="8">3000 ֏</strong></p>
             
         </div>
         
         <div class="card">
-            <img src="public/img/Picsart_24-06-06_10-03-38-354-scaled.jpg">
+            <img src="img/Picsart_24-06-06_10-03-38-354-scaled.jpg">
             <h3>Մորուք</h3>
             <p>Մոդելավորում</p>
-            <p><strong>2000 ֏</strong></p>
+           <p><strong class="service-price"
+   data-amd="2000"
+   data-rub="500"
+   data-usd="7">2000 ֏</strong></p>
         </div>
         
         <div class="card">
-            <img src="public/img/images.jpg">
+            <img src="img/images.jpg">
             <h3>VIP Փաթեթ</h3>
             <p>Լիարժեք խնամք</p>
-            <p><strong>5000 ֏</strong></p>
+         <p><strong class="service-price"
+   data-amd="5000"
+   data-rub="800"
+   data-usd="10">5000 ֏</strong></p>
         </div>
      </div>    
         
@@ -281,6 +290,18 @@ const translations = {
     sending:"Sending...", serverError:"Server problem"
   }
 };
+  function changeCurrency(lang) {
+  const currency = {
+    hy: { rate: "amd", symbol: "֏" },
+    ru: { rate: "rub", symbol: "₽" },
+    en: { rate: "usd", symbol: "$" }
+  };
+
+  document.querySelectorAll(".service-price").forEach(price => {
+    const amount = price.dataset[currency[lang].rate];
+    price.textContent = amount + " " + currency[lang].symbol;
+  });
+}
 
 function translateDynamicMessage(message) {
   if (currentLang === "hy") return message;
