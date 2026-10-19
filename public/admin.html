@@ -626,7 +626,7 @@ setInterval(() => {
 
 
 <script>
-let adminLanguage = "hy";
+let adminLanguage = localStorage.getItem("adminLanguage") || "hy";
 const adminTranslations = {
   hy: {
     subtitle:"Ադմինիստրատորի վահանակ", adminLabel:"🛡️ Ադմին պանել", loginTitle:"Ադմին մուտք",
@@ -726,8 +726,9 @@ function translateAdminMessage(message) {
 
 function changeAdminLanguage(lang) {
   if (!adminTranslations[lang]) return;
-  adminLanguage = lang;
-  const t = adminTranslations[lang];
+adminLanguage = lang;
+localStorage.setItem("adminLanguage", lang);
+const t = adminTranslations[lang];
   document.documentElement.lang = lang;
   document.querySelector(".brand p").textContent = t.subtitle;
   document.querySelector(".admin-label").textContent = t.adminLabel;
@@ -759,7 +760,7 @@ function changeAdminLanguage(lang) {
     if (closedEmpty) closedEmpty.textContent = t.closedPlaceholder;
   }
 }
-changeAdminLanguage("hy");
+changeAdminLanguage(adminLanguage);
 </script>
 
 </body>
