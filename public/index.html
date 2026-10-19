@@ -239,7 +239,7 @@ confirmBooking.onclick = async () => {
 
 
 <script>
-let currentLang = "hy";
+let currentLang = localStorage.getItem("siteLanguage") || "hy";
 const translations = {
   hy: {
     book:"Գրանցվել", name:"Անուն", phone:"Հեռախոս", phonePlaceholder:"հեռախոսահամարը՝ 077123456",
@@ -323,7 +323,10 @@ function translateDynamicMessage(message) {
 function changeLanguage(lang) {
   if (!translations[lang]) return;
  currentLang = lang;
+localStorage.setItem("siteLanguage", lang);
 const t = translations[lang];
+
+changeCurrency(lang);
 changeCurrency(lang);
   document.documentElement.lang = lang;
   document.getElementById("bookBtn").textContent = t.book;
@@ -349,7 +352,7 @@ changeCurrency(lang);
   document.querySelector(".language-switch").open = false;
   if (daySelect.options.length) loadNextWeekDays().then(loadTimesWithAvailability);
 }
-changeLanguage("hy");
+changeLanguage(currentLang);
 </script>
 
 </body>
