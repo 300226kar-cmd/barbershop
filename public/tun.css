@@ -267,6 +267,11 @@ font-size: 25px;
   
   }
 }
+@media (max-width: 600px) {
+  .hero img {
+    height: 250px;
+  }
+}
 @media  (max-width: 800px) and (min-width: 400px) {
   .hero{
     width: 100%;
