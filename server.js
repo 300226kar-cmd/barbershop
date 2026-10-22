@@ -80,14 +80,18 @@ app.post("/api/book", async (req, res) => {
 
     const id = Date.now();
 
-    await pool.query(
+        await pool.query(
       "INSERT INTO bookings (id, name, phone, date, time) VALUES ($1, $2, $3, $4, $5)",
       [id, name, phone, date, time]
     );
 
-    res.json({ message: "Պատվերը ընդունվեց" });
+    // 🔔 Ուղարկում ենք տեղեկատվություն Telegram-ով
+    await sendTelegramMessage(
+      `✂️ **Նոր ամրագրում բարբերշոփում!**\n\n👤 Անուն: ${name}\n📞 Հեռախոս: ${phone}\n📅 Ամսաթիվ: ${date}\n⏰ Ժամ: ${time}`
+    );
 
-  } catch (err) {
+    res.json({ message: "Պատվերը ընդունվեց" });
+ catch (err) {
     res.status(500).json({ message: "Database error" });
   }
 });
