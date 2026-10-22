@@ -1,3 +1,4 @@
+
 require("dotenv").config();
 
 const express = require("express");
@@ -30,10 +31,6 @@ const pool = new Pool({
     ? false
     : { rejectUnauthorized: false }
 });
-
-// ստեղծում ենք bookings table եթե չկա
-
-
 
 // ================= BOOKINGS =================
 
@@ -80,7 +77,7 @@ app.post("/api/book", async (req, res) => {
 
     const id = Date.now();
 
-        await pool.query(
+    await pool.query(
       "INSERT INTO bookings (id, name, phone, date, time) VALUES ($1, $2, $3, $4, $5)",
       [id, name, phone, date, time]
     );
@@ -91,7 +88,9 @@ app.post("/api/book", async (req, res) => {
     );
 
     res.json({ message: "Պատվերը ընդունվեց" });
- catch (err) {
+
+  } catch (err) {
+    console.error("Booking error:", err);
     res.status(500).json({ message: "Database error" });
   }
 });
@@ -252,4 +251,3 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log("🚀 Server running on port " + PORT);
 });
-
