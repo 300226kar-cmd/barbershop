@@ -5,22 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Barbershop</title>
 <link rel="stylesheet" href="tun.css">
-<style>
-
-</style>
-
-</head>
 
 <body>
-<details class="language-switch">
-  <summary id="languageButton">🌐 Լեզու ▾</summary>
-  <div class="language-menu" aria-label="Language">
-    <button type="button" onclick="changeLanguage('hy')" data-lang="hy">🇦🇲 Հայերեն</button>
-    <button type="button" onclick="changeLanguage('ru')" data-lang="ru">🇷🇺 Русский</button>
-    <button type="button" onclick="changeLanguage('en')" data-lang="en">🇬🇧 English</button>
-  </div>
-</details>
-<button id="bookBtn" >Գրանցվել</button>
+
 <header>
     <p class="p" id="p"> CHARENC BARBERSHOP</p>
    
@@ -43,9 +30,16 @@
 <p id="statusMsg"></p>
 </div>
 <div class="hero">
-    
-📞 +374-77-12-34-56
+ <details class="language-switch">
+  <summary id="languageButton"> Լեզու ▾</summary>
+  <div class="language-menu" aria-label="Language">
+    <button type="button" onclick="changeLanguage('hy')" data-lang="hy">🌐ᴀᴍ</button>
+    <button type="button" onclick="changeLanguage('ru')" data-lang="ru">🌐ʀᴜ</button>
+    <button type="button" onclick="changeLanguage('en')" data-lang="en">🌐ᴜꜱ</button>
+  </div>
+</details><!--📞 +374-77-12-34-56-->
 
+<button id="bookBtn" >Գրանցվել</button>
 </div>
 <div class="text1">
      <div class="text2">  
@@ -344,7 +338,12 @@ changeCurrency(lang);
     if (p[0] && t.descriptions[i]) p[0].textContent = t.descriptions[i];
   });
   document.querySelector(".hasc").textContent = t.address;
-  const languageNames = { hy: "🇦🇲 Հայերեն", ru: "🇷🇺 Русский", en: "🇬🇧 English" };
+  <details class="language-switch">
+  <summary id="languageButton"> Լեզու ▾</summary>
+ const languageNames = { hy: "🌐ᴀᴍ", ru: "🌐ʀᴜ", en: "🌐 ᴜꜱ" };
+</details><!--📞 +374-77-12-34-56-->
+
+<button id="bookBtn" >Գրանցվել</button>};
   document.getElementById("languageButton").textContent = languageNames[lang] + " ▾";
   document.querySelectorAll(".language-menu button").forEach(button => {
     button.classList.toggle("active", button.dataset.lang === lang);
