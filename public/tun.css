@@ -4,10 +4,10 @@ body {
   background-color: #252121b8;
 }
 .language-switch { position:relative; display:inline-block; padding:8px; z-index:1000; }
-.language-switch summary { list-style:none; cursor:pointer; padding:8px 12px; border:1px solid #b99a58; border-radius:6px; background:#171717; color:#fff; font:inherit; white-space:nowrap; }
+.language-switch summary { list-style:none; cursor:pointer; padding:8px 12px; border:1px solid #b99a58; border-radius:20px; background:#171717; color:#f2cb83; font:inherit; white-space:nowrap; }
 .language-switch summary::-webkit-details-marker { display:none; }
 .language-menu { position:absolute; top:calc(100% - 2px); left:8px; min-width:145px; display:flex; flex-direction:column; gap:4px; padding:6px; background:#171717; border:1px solid #b99a58; border-radius:7px; box-shadow:0 6px 18px #0005; }
-.language-menu button { cursor:pointer; text-align:left; padding:8px 10px; border:0; border-radius:5px; background:transparent; color:#fff; font:inherit; white-space:nowrap; }
+.language-menu button { z-index: 1000;cursor:pointer; text-align:left; padding:8px 10px; border:0px; border-radius:15px; background:transparent; color:#f2cb83; font:inherit; white-space:nowrap; }
 .language-menu button:hover, .language-menu button.active { background:#b99a58; color:#111; }
 .dd{ 
   border-radius: 10px;
@@ -15,10 +15,11 @@ body {
 
 }
 #bookBtn{
-position: fixed;
+right: 25px;
 right: 20px;
-top: 18px;
-z-index: 2;
+margin: 8px 10px;
+z-index: 1000;
+color:#f2cb83 ;
 }
 button {
   width: 140px;
@@ -102,10 +103,10 @@ header {
   text-shadow: -8px 8px 4px rgb(5, 5, 5);
 }
 header>p{
-  color: #d8b878;
+color:#f2cb83;
 }
 #bookingModal {
-  z-index: 1;
+  z-index: 2000;
   display: none;
   position: fixed;
   top: 50%;
@@ -148,7 +149,7 @@ select {
 }
 
 .hero {
-  background: url("public/img/nkar.png")
+  background: url("public/img/andrea-donato-MNu0n-3BIKs-unsplash__FocusFillWyIwLjAwIiwiMC4wMCIsMTEwMCw1Mjld.jpg")
     center/cover no-repeat;
   height: 450px;
   font-size: 35px;
@@ -295,7 +296,7 @@ font-size: 25px;
   }
   .text{
     font-size: 15px;
-   
+    letter-spacing: 1px;
   }
   .hasc{
     font-size: 17px;
@@ -335,8 +336,9 @@ font-size: 25px;
     height:100px ;
   }
   .text{
-    font-size: 8px;
+    font-size: 5px;
    padding: 7px;
+   letter-spacing: 0px;
   }
   .hasc{
     font-size: 12px;
@@ -348,9 +350,6 @@ font-size: 25px;
     font-size:15px ;
   }
 }
-
-
-
 
 
 
